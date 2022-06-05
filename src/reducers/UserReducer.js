@@ -1,12 +1,12 @@
 export const initialState = {
-  // name: '',
-  exercises: [],
+  name: '',
+  // exercises: [],
 };
 
 export const UserReducer = (state, action) => {
   switch (action.type) {
-    case 'setExercises':
-      return {...state, exercises: action.payload.exercises};
+    case 'setName':
+      return {...state, name: action.payload.name};
       break;
     default:
       return state;
