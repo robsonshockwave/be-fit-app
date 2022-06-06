@@ -55,4 +55,5 @@ export const TextTypeUser = styled.Text`
   text-align: center;
   color: #4f5967;
   padding: 10px 0 12px 0;
+  font-weight: 600;
 `;

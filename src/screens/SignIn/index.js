@@ -56,12 +56,6 @@ export default () => {
     }
   };
 
-  const handleSignUpClick = () => {
-    navigation.reset({
-      routes: [{name: 'SignUp'}],
-    });
-  };
-
   var radioProps = [
     {label: 'Aluno', value: 'G'},
     {label: 'Personal', value: 'P'},
@@ -132,9 +126,6 @@ export default () => {
         </WrapperOptions>
         <CustomButton onPress={handleSignClick}>
           <CustomButtonText>ENTRAR</CustomButtonText>
-        </CustomButton>
-        <CustomButton onPress={handleSignUpClick}>
-          <CustomButtonText>CADASTRAR</CustomButtonText>
         </CustomButton>
       </InputArea>
     </Container>

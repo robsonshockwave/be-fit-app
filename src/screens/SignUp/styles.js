@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-  background-color: #e5e5e5;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -20,7 +19,7 @@ export const TextTitle = styled.Text`
 `;
 
 export const InputArea = styled.View`
-  padding: 50px;
+  padding: 15px 50px;
   width: 100%;
 `;
 
@@ -41,4 +40,11 @@ export const CustomButtonText = styled.Text`
   line-height: 22px;
   text-align: center;
   color: #fff;
+`;
+
+export const TitleForm = styled.Text`
+  text-align: center;
+  font-size: 16px;
+  color: #30a960;
+  font-weight: bold;
 `;

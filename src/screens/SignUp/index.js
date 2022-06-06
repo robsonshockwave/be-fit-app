@@ -6,6 +6,7 @@ import {
   InputArea,
   CustomButton,
   CustomButtonText,
+  TitleForm,
 } from './styles';
 import {UserContext} from '../../contexts/UserContext';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -15,21 +16,10 @@ export default () => {
   const [nameField, setNameField] = React.useState('');
   const [emailField, setEmailField] = React.useState('');
   const [passwordField, setPasswordField] = React.useState('');
-  const [ageField, setAgeField] = React.useState('');
 
   const handleSignClick = async () => {
-    if (
-      nameField != '' &&
-      emailField != '' &&
-      passwordField != '' /* &&
-      age != '' */
-    ) {
-      let res = await Api.signUp(
-        nameField,
-        emailField,
-        passwordField,
-        // ageField,
-      );
+    if (nameField != '' && emailField != '' && passwordField != '') {
+      let res = await Api.signUp(nameField, emailField, passwordField);
       console.log(res);
 
       if (res.token) {
@@ -57,30 +47,31 @@ export default () => {
     <Container>
       <TextTitle>BE FIT</TextTitle>
 
+      <TitleForm>Cadastrar aluno</TitleForm>
       <InputArea>
         <SigninInput
           placeholder="Nome do aluno"
           value={nameField}
           onChangeText={t => setNameField(t)}
+          marginOne
+          radiusTop
         />
         <SigninInput
           placeholder="E-mail do aluno"
           value={emailField}
           onChangeText={t => setEmailField(t)}
+          marginOne
         />
         <SigninInput
           placeholder="Senha"
           value={passwordField}
           onChangeText={t => setPasswordField(t)}
           password={true}
-        />
-        <SigninInput
-          placeholder="Idade do aluno"
-          value={ageField}
-          onChangeText={t => setAgeField(t)}
+          marginOne
+          radiusBottom
         />
         <CustomButton onPress={handleSignClick}>
-          <CustomButtonText>CADASTRAR ALUNO</CustomButtonText>
+          <CustomButtonText>Cadastrar aluno</CustomButtonText>
         </CustomButton>
       </InputArea>
     </Container>
