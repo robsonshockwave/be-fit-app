@@ -70,6 +70,8 @@ export default () => {
           placeholder="Usuário"
           value={emailField}
           onChangeText={t => setEmailField(t)}
+          radiusTop
+          radiusBottom
         />
         <SigninInput
           placeholder="Senha"
@@ -78,6 +80,8 @@ export default () => {
             setPasswordField(t);
           }}
           password={true}
+          radiusTop
+          radiusBottom
         />
 
         <TextTypeUser>Você é:</TextTypeUser>

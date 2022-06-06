@@ -82,6 +82,7 @@ export const StudentWrapper = styled.View``;
 
 export const DeleteStudentButton = styled.TouchableOpacity`
   margin-right: 20px;
+  z-index: 2;
 `;
 
 export const StudentCard = styled.View`

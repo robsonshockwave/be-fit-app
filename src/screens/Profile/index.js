@@ -91,10 +91,10 @@ export default () => {
               marginOne
               radiusBottom
             />
-            <TextEdit onPress={handleEditProfile}>Cancelar</TextEdit>
             <CustomButton onPress={handleAttClick}>
               <CustomButtonText>Atualizar</CustomButtonText>
             </CustomButton>
+            <TextEdit onPress={handleEditProfile}>Cancelar</TextEdit>
           </>
         )}
       </InputArea>

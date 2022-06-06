@@ -53,7 +53,7 @@ export const TextTypeUser = styled.Text`
   font-family: 'Montserrat';
   font-size: 14px;
   text-align: center;
-  color: #4f5967;
-  padding: 10px 0 12px 0;
-  font-weight: 600;
+  color: #30a960;
+  padding: 12px 0;
+  font-weight: 700;
 `;

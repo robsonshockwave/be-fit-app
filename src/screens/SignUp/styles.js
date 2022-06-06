@@ -24,7 +24,7 @@ export const InputArea = styled.View`
 `;
 
 export const CustomButton = styled.TouchableOpacity`
-  margin-top: 27px;
+  margin-top: 18px;
   background: #30a960;
   border-radius: 10px;
   height: 48px;
@@ -47,4 +47,13 @@ export const TitleForm = styled.Text`
   font-size: 16px;
   color: #30a960;
   font-weight: bold;
+`;
+
+export const TextEdit = styled.Text`
+  text-align: center;
+  padding-top: 14px;
+  font-size: 14px;
+  color: #4f5967;
+  text-decoration: dashed;
+  font-weight: 500;
 `;
