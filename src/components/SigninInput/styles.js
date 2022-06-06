@@ -5,10 +5,14 @@ export const InputArea = styled.View`
   width: 100%;
   height: 48px;
   background-color: #d7d7d7;
-  border-radius: 8px;
+  border-top-left-radius: ${props => props.radiusTop};
+  border-bottom-left-radius: ${props => props.radiusBottom};
+  border-top-right-radius: ${props => props.radiusTop};
+  border-bottom-right-radius: ${props => props.radiusBottom};
   justify-content: center;
   align-items: flex-start;
   margin-bottom: 17px;
+  margin: ${props => props.marginOne};
 `;
 
 export const Input = styled.TextInput`

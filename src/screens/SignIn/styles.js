@@ -42,3 +42,17 @@ export const CustomButtonText = styled.Text`
   text-align: center;
   color: #fff;
 `;
+
+export const WrapperOptions = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px;
+`;
+
+export const TextTypeUser = styled.Text`
+  font-family: 'Montserrat';
+  font-size: 14px;
+  text-align: center;
+  color: #4f5967;
+  padding: 10px 0 12px 0;
+`;

@@ -37,4 +37,16 @@ export default {
     const json = await req.json();
     return json;
   },
+  attAccountData: async (name, password, id) => {
+    const req = await fetch(`${BASE_API}/user/gymstudent/${id}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({name, password}),
+    });
+    const json = await req.json();
+    return json;
+  },
 };
