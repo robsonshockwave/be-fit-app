@@ -103,16 +103,6 @@ export default () => {
     }
   };
 
-  React.useEffect(() => {
-    const chamar = async () => {
-      const token = await AsyncStorage.getItem('token');
-      const res = await Api.getProfilePersonal(id, token);
-      console.log(res, 'hahahaqhha');
-    };
-
-    chamar();
-  }, []);
-
   return (
     <Container>
       <TextTitle>BE FIT</TextTitle>
@@ -120,7 +110,6 @@ export default () => {
       <InputArea>
         {!editProfile ? (
           <>
-            {console.log(name, email)}
             <TitleForm>Dados da conta</TitleForm>
             <SigninInput
               placeholder={name}
@@ -161,7 +150,7 @@ export default () => {
               />
             )}
             <SigninInput
-              placeholder="Senha"
+              placeholder="Digite sua senha"
               value={passwordField}
               onChangeText={t => {
                 setPasswordField(t);

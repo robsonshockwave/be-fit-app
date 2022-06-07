@@ -57,9 +57,7 @@ export default () => {
 
   const handleDeleteStudent = async id => {
     const token = await AsyncStorage.getItem('token');
-    console.log(token, 'token aqui');
     let res = await Api.deleteStudent(id, token);
-    console.log(res);
 
     if (res) {
       requestListStudents();

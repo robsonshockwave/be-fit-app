@@ -63,8 +63,6 @@ export default () => {
           },
         });
 
-        console.log(user, 'user result SignIn');
-
         navigation.reset({
           routes: [{name: 'MainTab'}],
         });
