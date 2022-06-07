@@ -10,13 +10,18 @@ import {
   TextEdit,
 } from './styles';
 import {UserContext} from '../../contexts/UserContext';
-
 import Api from '../../services/Api';
+import AsyncStorage from '@react-native-community/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
 export default () => {
-  const [nameField, setNameField] = React.useState('');
+  const navigation = useNavigation();
+  const {state: resultUser, dispatch: userDispatch} =
+    React.useContext(UserContext);
+  const {id, name, email, useType} = resultUser;
+  const [nameField, setNameField] = React.useState(name);
   const [passwordField, setPasswordField] = React.useState('');
-
+  const [emailField, setEmailField] = React.useState(email);
   const [editProfile, setEditProfile] = React.useState(false);
 
   const handleEditProfile = () => {
@@ -24,26 +29,89 @@ export default () => {
   };
 
   const handleAttClick = async () => {
-    if (nameField != '' && passwordField != '') {
-      let res = await Api.attAccountData(nameField, passwordField);
-      console.log(res);
+    const token = await AsyncStorage.getItem('token');
 
-      if (res) {
-        // userDispatch({
-        //   type: 'setName',
-        //   payload: {
-        //     name: res.data.name,
-        //   },
-        // });
+    if (useType === 'G') {
+      if (nameField != '' && passwordField != '') {
+        let res = await Api.attAccountDataStudent(
+          nameField,
+          passwordField,
+          id,
+          token,
+        );
+
+        if (res) {
+          const newData = await Api.getProfile(id, token);
+
+          userDispatch({
+            type: 'setName',
+            payload: {
+              name: newData.name,
+            },
+          });
+          userDispatch({
+            type: 'setEmail',
+            payload: {
+              email: newData.email,
+            },
+          });
+
+          alert('Dados atualizado!');
+          navigation.navigate('Home');
+        } else {
+          alert('Error: ' + res.error);
+        }
       } else {
-        alert('Ocorreu um erro!');
+        alert('Preencha os campos!');
       }
     } else {
-      alert('Preencha os campos!');
-    }
+      if (nameField != '' && emailField != '' && passwordField != '') {
+        let res = await Api.attAccountDataPersonal(
+          nameField,
+          passwordField,
+          emailField,
+          id,
+          token,
+        );
 
-    setEditProfile(false);
+        if (res) {
+          userDispatch({
+            type: 'setName',
+            payload: {
+              name: newData.name,
+            },
+          });
+          userDispatch({
+            type: 'setEmail',
+            payload: {
+              email: newData.email,
+            },
+          });
+
+          console.log('resss', res);
+
+          alert('Dados atualizados!');
+          navigation.navigate('Home');
+        } else {
+          alert('Error: ' + res.error);
+        }
+      } else {
+        alert('Preencha os campos!');
+      }
+
+      setEditProfile(false);
+    }
   };
+
+  React.useEffect(() => {
+    const chamar = async () => {
+      const token = await AsyncStorage.getItem('token');
+      const res = await Api.getProfile(id, token);
+      console.log(res, 'hahahaqhha');
+    };
+
+    chamar();
+  }, []);
 
   return (
     <Container>
@@ -52,15 +120,16 @@ export default () => {
       <InputArea>
         {!editProfile ? (
           <>
+            {console.log(name, email)}
             <TitleForm>Dados da conta</TitleForm>
             <SigninInput
-              placeholder="Nome"
+              placeholder={name}
               editable={false}
               marginOne
               radiusTop
             />
             <SigninInput
-              placeholder="E-mail"
+              placeholder={email}
               editable={false}
               marginOne
               radiusBottom
@@ -81,8 +150,18 @@ export default () => {
               marginOne
               radiusTop
             />
+            {useType === 'P' && (
+              <SigninInput
+                placeholder="E-mail"
+                value={emailField}
+                onChangeText={t => {
+                  setEmailField(t);
+                }}
+                marginOne
+              />
+            )}
             <SigninInput
-              placeholder="Nova senha"
+              placeholder="Senha"
               value={passwordField}
               onChangeText={t => {
                 setPasswordField(t);

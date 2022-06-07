@@ -19,9 +19,10 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
+import jwt_decode from 'jwt-decode';
 
 export default () => {
-  const {dispatch: userDispatch} = React.useContext(UserContext);
+  const {dispatch: userDispatch, state: user} = React.useContext(UserContext);
   const [emailField, setEmailField] = React.useState('');
   const [passwordField, setPasswordField] = React.useState('');
   const [typeUserField, setTypeUserField] = React.useState('');
@@ -30,20 +31,40 @@ export default () => {
   const navigation = useNavigation();
 
   const handleSignClick = async () => {
-    if (emailField != '' && passwordField != '') {
-      // && typeUserField != ''
-      let res = await Api.signIn(emailField, passwordField);
-      console.log(res);
+    if (emailField != '' && passwordField != '' && typeUserField != '') {
+      let res = await Api.signIn(emailField, passwordField, typeUserField);
 
-      if (res.token) {
-        await AsyncStorage.setItem('token', res.token);
+      const decoded = jwt_decode(res);
 
+      if (res) {
+        await AsyncStorage.setItem('token', res);
+
+        userDispatch({
+          type: 'setUseType',
+          payload: {
+            useType: decoded.useType,
+          },
+        });
         userDispatch({
           type: 'setName',
           payload: {
-            name: res.data.name,
+            name: decoded.name,
           },
         });
+        userDispatch({
+          type: 'setEmail',
+          payload: {
+            email: decoded.email,
+          },
+        });
+        userDispatch({
+          type: 'setId',
+          payload: {
+            id: decoded.id,
+          },
+        });
+
+        console.log(user, 'user result SignIn');
 
         navigation.reset({
           routes: [{name: 'MainTab'}],

@@ -21,12 +21,16 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import DeleteIcon from '../../assets/delete-icon.svg';
+import {RefreshControl} from 'react-native';
 
 import Api from '../../services/Api';
+import {UserContext} from '../../contexts/UserContext';
 
 export default () => {
   const navigation = useNavigation();
+  const {state: resultUser} = React.useContext(UserContext);
   const [listStudents, setListStudents] = React.useState([]);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   const signOut = async () => {
     await AsyncStorage.removeItem('token');
@@ -34,45 +38,10 @@ export default () => {
     navigation.navigate('SignIn');
   };
 
-  const mock = [
-    {
-      name: 'Robson Arruda',
-      goal: 'Ganhar peso',
-    },
-    {
-      name: 'Carlos Souza',
-      goal: 'Ficar maromba',
-    },
-    {
-      name: 'Luan Bernabe',
-      goal: 'Apenas para melhorar a saúde',
-    },
-    {
-      name: 'João Lucas Ribeiro',
-      goal: 'Malhar os glúteos',
-    },
-    {
-      name: 'Robson Arruda',
-      goal: 'Ganhar peso',
-    },
-    {
-      name: 'Robson Arruda',
-      goal: 'Ganhar peso',
-    },
-    {
-      name: 'Robson Arruda',
-      goal: 'Ganhar peso',
-    },
-    {
-      name: 'Robson Arruda',
-      goal: 'Ganhar peso',
-    },
-  ];
-
   const requestListStudents = async () => {
-    const personalId = 1;
-    let res = await Api.getListStudents(personalId);
-    console.log(res);
+    const token = await AsyncStorage.getItem('token');
+    const personalId = resultUser.id;
+    const res = await Api.getListStudents(personalId, token);
 
     if (res) {
       setListStudents(res);
@@ -83,9 +52,10 @@ export default () => {
     }
   };
 
-  const handleDeleteStudent = async () => {
-    const personalId = 1;
-    let res = await Api.deleteStudent(personalId);
+  const handleDeleteStudent = async id => {
+    const token = await AsyncStorage.getItem('token');
+    console.log(token, 'token aqui');
+    let res = await Api.deleteStudent(id, token);
     console.log(res);
 
     if (res) {
@@ -93,6 +63,11 @@ export default () => {
     } else {
       alert('Ops, ocorreu um erro ao deletar o aluno!');
     }
+  };
+
+  const onRefresh = () => {
+    setRefreshing(false);
+    requestListStudents();
   };
 
   React.useEffect(() => {
@@ -109,7 +84,9 @@ export default () => {
       </WrapperHeader>
       <TextHello>Olá, usuário! ;{')'}</TextHello>
 
-      {true ? (
+      {console.log(resultUser?.useType, 'resultUser?.useType')}
+
+      {resultUser?.useType === 'P' ? (
         <>
           <WrapperTitleList>
             <TextList>Alunos</TextList>
@@ -120,14 +97,18 @@ export default () => {
               <TextAddStudentButton>Adicionar aluno</TextAddStudentButton>
             </AddStudentButton>
           </WrapperTitleList>
-          <StudentsView>
-            {mock.map((values, index) => (
+          <StudentsView
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }>
+            {listStudents.map((values, index) => (
               <StudentCard key={index}>
                 <StudentWrapper>
                   <StudentName>{values.name}</StudentName>
-                  <StudentGoal>{values.goal}</StudentGoal>
+                  <StudentGoal>{values.goals}</StudentGoal>
                 </StudentWrapper>
-                <DeleteStudentButton onPress={handleDeleteStudent}>
+                <DeleteStudentButton
+                  onPress={() => handleDeleteStudent(values.id)}>
                   <DeleteIcon fill="red" height="28" width="28" />
                 </DeleteStudentButton>
               </StudentCard>

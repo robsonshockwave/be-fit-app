@@ -11,30 +11,36 @@ import {
 } from './styles';
 import Api from '../../services/Api';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {UserContext} from '../../contexts/UserContext';
 
 export default () => {
   const navigation = useNavigation();
+  const {state: user} = React.useContext(UserContext);
   const [nameField, setNameField] = React.useState('');
   const [emailField, setEmailField] = React.useState('');
   const [goalsField, setGoalsField] = React.useState('');
   const [passwordField, setPasswordField] = React.useState('');
 
   const handleSignClick = async () => {
+    const token = await AsyncStorage.getItem('token');
+
+    const personalId = user.id;
+
     if (
       nameField != '' &&
       emailField != '' &&
       passwordField != '' &&
       goalsField != ''
     ) {
-      const personalId = 1;
       let res = await Api.signUp(
         nameField,
         emailField,
         passwordField,
-        goals,
+        goalsField,
         personalId,
+        token,
       );
-      console.log(res);
 
       if (res) {
         alert('Aluno cadastrado!');

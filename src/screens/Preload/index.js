@@ -3,48 +3,61 @@ import {Container, LoadingIcon} from './styles';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {UserContext} from '../../contexts/UserContext';
-
+import jwt_decode from 'jwt-decode';
 import Api from '../../services/Api';
-
 import LogoSvg from '../../assets/logo.svg';
 
 export default () => {
   const navigation = useNavigation();
   const {dispatch: userDispatch} = React.useContext(UserContext);
 
+  const checkToken = async () => {
+    const token = await AsyncStorage.getItem('token');
+
+    if (token) {
+      // let res = await Api.checkToken(token);
+      const decoded = jwt_decode(token);
+
+      await AsyncStorage.setItem('token', token);
+
+      userDispatch({
+        type: 'setUseType',
+        payload: {
+          useType: decoded.useType,
+        },
+      });
+      userDispatch({
+        type: 'setName',
+        payload: {
+          name: decoded.name,
+        },
+      });
+      userDispatch({
+        type: 'setEmail',
+        payload: {
+          email: decoded.email,
+        },
+      });
+      userDispatch({
+        type: 'setId',
+        payload: {
+          id: decoded.id,
+        },
+      });
+
+      navigation.reset({
+        routes: [{name: 'MainTab'}],
+      });
+    } else {
+      navigation.navigate('SignIn');
+    }
+  };
+
   React.useEffect(() => {
-    const checkToken = async () => {
-      const token = await AsyncStorage.getItem('token');
-
-      if (token) {
-        let res = await Api.checkToken(token);
-
-        if (res.token) {
-          await AsyncStorage.setItem('token', res.token);
-
-          userDispatch({
-            type: 'setName',
-            payload: {
-              name: res.data.name,
-            },
-          });
-
-          navigation.reset({
-            routes: [{name: 'MainTab'}],
-          });
-        } else {
-          navigation.navigate('SignIn');
-        }
-      } else {
-        navigation.navigate('SignIn');
-      }
-    };
-
-    setTimeout(() => {
-      checkToken();
+    setTimeout(async () => {
+      await checkToken();
     }, 1000);
-  }),
-    [];
+  }, []);
 
   return (
     <Container>
