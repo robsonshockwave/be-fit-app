@@ -21,7 +21,7 @@ export default () => {
   const {id, name, email, useType} = resultUser;
   const [nameField, setNameField] = React.useState(name);
   const [passwordField, setPasswordField] = React.useState('');
-  const [emailField, setEmailField] = React.useState(email);
+  const [emailField, setEmailField] = React.useState(email.trim());
   const [editProfile, setEditProfile] = React.useState(false);
 
   const handleEditProfile = () => {
@@ -41,7 +41,7 @@ export default () => {
         );
 
         if (res) {
-          const newData = await Api.getProfile(id, token);
+          const newData = await Api.getProfileStudent(id, token);
 
           userDispatch({
             type: 'setName',
@@ -75,6 +75,8 @@ export default () => {
         );
 
         if (res) {
+          const newData = await Api.getProfilePersonal(id, token);
+
           userDispatch({
             type: 'setName',
             payload: {
@@ -87,8 +89,6 @@ export default () => {
               email: newData.email,
             },
           });
-
-          console.log('resss', res);
 
           alert('Dados atualizados!');
           navigation.navigate('Home');
@@ -106,7 +106,7 @@ export default () => {
   React.useEffect(() => {
     const chamar = async () => {
       const token = await AsyncStorage.getItem('token');
-      const res = await Api.getProfile(id, token);
+      const res = await Api.getProfilePersonal(id, token);
       console.log(res, 'hahahaqhha');
     };
 

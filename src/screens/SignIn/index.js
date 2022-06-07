@@ -35,7 +35,6 @@ export default () => {
       let res = await Api.signIn(emailField, passwordField, typeUserField);
 
       const decoded = jwt_decode(res);
-
       if (res) {
         await AsyncStorage.setItem('token', res);
 

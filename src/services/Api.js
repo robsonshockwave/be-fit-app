@@ -54,7 +54,7 @@ export default {
       return;
     }
   },
-  getProfile: async (id, token) => {
+  getProfileStudent: async (id, token) => {
     try {
       let res = await fetch(`${BASE_API}/api/gymstudent/load`, {
         method: 'POST',
@@ -66,6 +66,23 @@ export default {
         body: JSON.stringify({
           id: id.toString(),
         }),
+      });
+      console.log(res);
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  getProfilePersonal: async (id, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/personal/list/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
       });
       console.log(res);
       return await res.json();
@@ -138,7 +155,7 @@ export default {
         },
         body: JSON.stringify({name, password, email}),
       });
-      console.log(res);
+      console.log(res, 'hbsdhbfdshbdfshjubsdjfujnhfsdjnfdsjn');
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);

@@ -35,7 +35,7 @@ export const TextLogout = styled.Text`
 `;
 
 export const TextHello = styled.Text`
-  margin: 40px 30px 30px;
+  margin: 40px 30px 20px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
@@ -78,6 +78,18 @@ export const StudentsView = styled.ScrollView`
   margin-bottom: 310px;
 `;
 
+export const TextBold = styled.Text`
+  font-weight: 700;
+`;
+
+export const TextGoTrain = styled.Text`
+  font-weight: 700;
+  font-size: 24px;
+  font-family: 'Montserrat';
+  color: #4f5967;
+  margin: -10px 0 20px 30px;
+`;
+
 export const StudentWrapper = styled.View``;
 
 export const DeleteStudentButton = styled.TouchableOpacity`
@@ -110,4 +122,10 @@ export const StudentGoal = styled.Text`
   font-style: normal;
   font-size: 13px;
   color: #4f5967;
+`;
+
+export const ImageDayExercise = styled.Image`
+  margin: 0 30px;
+  max-width: 376px;
+  height: 230px;
 `;

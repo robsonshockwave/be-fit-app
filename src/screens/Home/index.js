@@ -5,26 +5,29 @@ import {
   Container,
   DeleteStudentButton,
   HeaderTitle,
+  ImageDayExercise,
   StudentCard,
   StudentGoal,
   StudentName,
   StudentsView,
   StudentWrapper,
-  Teste,
   TextAddStudentButton,
+  TextBold,
+  TextGoTrain,
   TextHello,
   TextList,
   TextLogout,
   WrapperHeader,
   WrapperTitleList,
 } from './styles.';
+import {Image} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import DeleteIcon from '../../assets/delete-icon.svg';
 import {RefreshControl} from 'react-native';
-
 import Api from '../../services/Api';
 import {UserContext} from '../../contexts/UserContext';
+import DayExercise from '../../assets/dayExercise.png';
 
 export default () => {
   const navigation = useNavigation();
@@ -82,9 +85,9 @@ export default () => {
           <TextLogout>SAIR</TextLogout>
         </ButtonLogout>
       </WrapperHeader>
-      <TextHello>Olá, usuário! ;{')'}</TextHello>
-
-      {console.log(resultUser?.useType, 'resultUser?.useType')}
+      <TextHello>
+        Olá, <TextBold>{resultUser.name}</TextBold>! 💪
+      </TextHello>
 
       {resultUser?.useType === 'P' ? (
         <>
@@ -115,7 +118,12 @@ export default () => {
             ))}
           </StudentsView>
         </>
-      ) : null}
+      ) : (
+        <>
+          <TextGoTrain>Bora treinar</TextGoTrain>
+          <ImageDayExercise source={DayExercise} />
+        </>
+      )}
     </Container>
   );
 };
