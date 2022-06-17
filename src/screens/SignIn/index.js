@@ -85,7 +85,7 @@ export default () => {
 
       <InputArea>
         <SigninInput
-          placeholder="Usuário"
+          placeholder="E-mail"
           value={emailField}
           onChangeText={t => setEmailField(t)}
           radiusTop
