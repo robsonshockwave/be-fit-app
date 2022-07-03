@@ -102,7 +102,16 @@ export default () => {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }>
             {listStudents.map((values, index) => (
-              <StudentCard key={index}>
+              <StudentCard
+                key={index}
+                onPress={() => {
+                  navigation.navigate('Student', {
+                    id: values.id,
+                    name: values.name,
+                    goals: values.goals,
+                    index: index,
+                  });
+                }}>
                 <StudentWrapper>
                   <StudentName>{values.name}</StudentName>
                   <StudentGoal>{values.goals}</StudentGoal>

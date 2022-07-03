@@ -1,4 +1,5 @@
-const BASE_API = 'http://10.0.2.2:3000';
+const BASE_API = 'https://api-be-fit-dev.up.railway.app';
+// const BASE_API = 'http://10.0.2.2:3000';
 
 export default {
   checkToken: async token => {
@@ -155,7 +156,6 @@ export default {
         },
         body: JSON.stringify({name, password, email}),
       });
-      console.log(res, 'hbsdhbfdshbdfshjubsdjfujnhfsdjnfdsjn');
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);

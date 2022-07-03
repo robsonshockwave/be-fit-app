@@ -97,7 +97,7 @@ export const DeleteStudentButton = styled.TouchableOpacity`
   z-index: 2;
 `;
 
-export const StudentCard = styled.View`
+export const StudentCard = styled.TouchableOpacity`
   flex-direction: row;
   height: 67px;
   margin: 10px 30px 4px;
