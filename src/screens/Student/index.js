@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   AddTrainingButton,
@@ -11,9 +12,9 @@ import {
   WrapperStudentRecord,
   WrapperTitle,
 } from './styles';
-import {Text} from 'react-native';
 
 export default ({route}) => {
+  const navigation = useNavigation();
   const [student, setStudent] = React.useState({});
 
   React.useEffect(() => {
@@ -41,7 +42,10 @@ export default ({route}) => {
 
       <AddTrainingButton
         onPress={() => {
-          // navigation.navigate('');
+          navigation.navigate('Training', {
+            id: student.id,
+            name: student.name,
+          });
         }}>
         <TextAddTraining>Adicionar treino</TextAddTraining>
       </AddTrainingButton>

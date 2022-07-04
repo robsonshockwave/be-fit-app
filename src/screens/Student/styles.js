@@ -66,6 +66,6 @@ export const TextAddTraining = styled.Text`
   padding: 12px;
   text-align: center;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 `;

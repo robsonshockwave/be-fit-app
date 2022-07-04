@@ -8,6 +8,7 @@ import SignUp from '../screens/SignUp';
 import Student from '../screens/Student';
 
 import CustomTabBar from '../components/CustomTabBar';
+import Training from '../screens/Training';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,11 +24,8 @@ export default () => {
       <Tab.Screen name="Progress" component={Progress} />
       <Tab.Screen name="Profile" component={Profile} />
       <Tab.Screen name="SignUp" component={SignUp} />
-      <Tab.Screen
-        name="Student"
-        component={Student}
-        getId={({params}) => params.userId}
-      />
+      <Tab.Screen name="Student" component={Student} />
+      <Tab.Screen name="Training" component={Training} />
     </Tab.Navigator>
   );
 };

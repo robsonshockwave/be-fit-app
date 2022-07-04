@@ -77,7 +77,12 @@ export default () => {
   return (
     <Container>
       <WrapperHeader>
-        <HeaderTitle>BE FIT</HeaderTitle>
+        <HeaderTitle
+          onPress={() => {
+            navigation.navigate('Training');
+          }}>
+          BE FIT
+        </HeaderTitle>
         <ButtonLogout onPress={signOut}>
           <TextLogout>SAIR</TextLogout>
         </ButtonLogout>
@@ -101,27 +106,29 @@ export default () => {
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }>
-            {listStudents.map((values, index) => (
-              <StudentCard
-                key={index}
-                onPress={() => {
-                  navigation.navigate('Student', {
-                    id: values.id,
-                    name: values.name,
-                    goals: values.goals,
-                    index: index,
-                  });
-                }}>
-                <StudentWrapper>
-                  <StudentName>{values.name}</StudentName>
-                  <StudentGoal>{values.goals}</StudentGoal>
-                </StudentWrapper>
-                <DeleteStudentButton
-                  onPress={() => handleDeleteStudent(values.id)}>
-                  <DeleteIcon fill="red" height="28" width="28" />
-                </DeleteStudentButton>
-              </StudentCard>
-            ))}
+            {console.log(listStudents)}
+            {/* {listStudents &&
+              listStudents.map((values, index) => (
+                <StudentCard
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate('Student', {
+                      id: values.id,
+                      name: values.name,
+                      goals: values.goals,
+                      index: index,
+                    });
+                  }}>
+                  <StudentWrapper>
+                    <StudentName>{values.name}</StudentName>
+                    <StudentGoal>{values.goals}</StudentGoal>
+                  </StudentWrapper>
+                  <DeleteStudentButton
+                    onPress={() => handleDeleteStudent(values.id)}>
+                    <DeleteIcon fill="red" height="28" width="28" />
+                  </DeleteStudentButton>
+                </StudentCard>
+              ))} */}
           </StudentsView>
         </>
       ) : (

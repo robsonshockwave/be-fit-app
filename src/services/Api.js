@@ -31,7 +31,7 @@ export default {
       return;
     }
   },
-  signUp: async (name, email, password, goals, personalId, token) => {
+  signUp: async (name, email, goals, personalId, token) => {
     try {
       let res = await fetch(`${BASE_API}/api/gymstudent/create`, {
         method: 'POST',
@@ -43,7 +43,6 @@ export default {
         body: JSON.stringify({
           name,
           email,
-          password,
           goals,
           PersonalId: personalId.toString(),
         }),
