@@ -89,6 +89,7 @@ export default () => {
         />
         <SigninInput
           placeholder="Perna (Circunferência)"
+          placeholder="Perna (Circunferência)"
           value={legsField}
           onChangeText={t => setLegsField(t)}
           marginOne
