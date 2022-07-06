@@ -8,8 +8,6 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const TextTitle = styled.Text`
-  position: absolute;
-  top: 50px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;

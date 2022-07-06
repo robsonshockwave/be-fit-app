@@ -19,22 +19,6 @@ export const TextName = styled.Text`
   font-size: 20px;
   color: #4f5967;
 `;
-
-export const VerifyProgressButton = styled.TouchableOpacity`
-  margin-right: 30px;
-  height: 30px;
-  border-radius: 10px;
-  background-color: rgba(48, 169, 96, 0.32);
-  align-items: center;
-  justify-content: center;
-  padding: 0px 10px;
-`;
-
-export const TextVerifyProgress = styled.Text`
-  font-size: 13px;
-  color: #30a960;
-`;
-
 export const WrapperStudentRecord = styled.View`
   margin: 30px;
   border-radius: 10px;
@@ -45,8 +29,7 @@ export const WrapperStudentRecord = styled.View`
 export const TextRecordTitle = styled.Text`
   font-size: 17px;
   color: #4f5967;
-  margin-top: -5px;
-  padding-bottom: 7px;
+  padding-bottom: 10px;
   font-weight: bold;
 `;
 

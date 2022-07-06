@@ -27,7 +27,10 @@ export default ({route}) => {
         <TextName>{student.name}</TextName>
         <VerifyProgressButton
           onPress={() => {
-            // navigation.navigate('');
+            navigation.navigate('VerifyProgress', {
+              studentId: student.id,
+              studentName: student.name,
+            });
           }}>
           <TextVerifyProgress>Verificar progresso</TextVerifyProgress>
         </VerifyProgressButton>
@@ -42,10 +45,10 @@ export default ({route}) => {
 
       <AddTrainingButton
         onPress={() => {
-          navigation.navigate('Training', {
-            id: student.id,
-            name: student.name,
-          });
+          // navigation.navigate('Training', {
+          //   id: student.id,
+          //   name: student.name,
+          // });
         }}>
         <TextAddTraining>Adicionar treino</TextAddTraining>
       </AddTrainingButton>

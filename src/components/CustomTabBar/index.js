@@ -59,7 +59,7 @@ export default ({state, navigation}) => {
               style={{opacity: state.index === 2 ? 1 : 0.6}}
             />
             <TextIcon style={{opacity: state.index === 2 ? 1 : 0.6}}>
-              Progresso
+              Progressos
             </TextIcon>
           </TabItem>
         ) : null}

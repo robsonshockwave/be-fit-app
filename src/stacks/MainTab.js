@@ -6,9 +6,12 @@ import Progress from '../screens/Progress';
 import Profile from '../screens/Profile';
 import SignUp from '../screens/SignUp';
 import Student from '../screens/Student';
-
+import AddProgress from '../screens/AddProgress';
 import CustomTabBar from '../components/CustomTabBar';
 import Training from '../screens/Training';
+import VideoTraining from '../screens/VideoTraining';
+import VerifyProgress from '../screens/VerifyProgress';
+import ListTraining from '../screens/ListTraining';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +29,10 @@ export default () => {
       <Tab.Screen name="SignUp" component={SignUp} />
       <Tab.Screen name="Student" component={Student} />
       <Tab.Screen name="Training" component={Training} />
+      <Tab.Screen name="AddProgress" component={AddProgress} />
+      <Tab.Screen name="VideoTraining" component={VideoTraining} />
+      <Tab.Screen name="VerifyProgress" component={VerifyProgress} />
+      <Tab.Screen name="ListTraining" component={ListTraining} />
     </Tab.Navigator>
   );
 };

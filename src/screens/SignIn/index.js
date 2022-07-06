@@ -88,8 +88,8 @@ export default () => {
           placeholder="E-mail"
           value={emailField}
           onChangeText={t => setEmailField(t)}
+          marginOne
           radiusTop
-          radiusBottom
         />
         <SigninInput
           placeholder="Senha"
@@ -98,7 +98,7 @@ export default () => {
             setPasswordField(t);
           }}
           password={true}
-          radiusTop
+          marginOne
           radiusBottom
         />
 
@@ -147,7 +147,7 @@ export default () => {
           ))}
         </WrapperOptions>
         <CustomButton onPress={handleSignClick}>
-          <CustomButtonText>ENTRAR</CustomButtonText>
+          <CustomButtonText>Fazer login</CustomButtonText>
         </CustomButton>
       </InputArea>
     </Container>

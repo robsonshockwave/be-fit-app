@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   Container,
@@ -6,29 +5,24 @@ import {
   TextRecord,
   TextRecordTitle,
   TextType,
-  TextVerifyProgress,
-  VerifyProgressButton,
   WrapperStudentRecord,
   WrapperTitle,
 } from './styles';
 
-export default () => {
-  const navigation = useNavigation();
+export default ({route}) => {
+  const [student, setStudent] = React.useState({});
+
+  React.useEffect(() => {
+    setStudent(route.params);
+  }, []);
 
   return (
     <Container>
       <WrapperTitle>
-        <TextName>👌 Seus progressos</TextName>
-        <VerifyProgressButton
-          onPress={() => {
-            navigation.navigate('AddProgress');
-          }}>
-          <TextVerifyProgress>Adicionar progresso</TextVerifyProgress>
-        </VerifyProgressButton>
+        <TextName>🤓 Progresso de {student.studentName}</TextName>
       </WrapperTitle>
 
       <WrapperStudentRecord>
-        <TextRecordTitle>Data :</TextRecordTitle>
         <TextType>Medidas Corporais</TextType>
         <TextRecord>Peso: </TextRecord>
         <TextRecord>Altura: </TextRecord>

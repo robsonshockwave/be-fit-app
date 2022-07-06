@@ -82,6 +82,7 @@ export default () => {
           value={emailField}
           onChangeText={t => setEmailField(t)}
           marginOne
+          // radiusBottom
         />
         <SigninInput
           placeholder="Senha"

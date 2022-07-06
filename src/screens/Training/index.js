@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   Container,
   CustomButton,
   CustomButtonText,
   InputArea,
   TextEdit,
+  TextPreVideo,
   TextTitle,
   TextUploadVideo,
   TextVideoExist,
@@ -15,46 +16,41 @@ import SigninInput from '../../components/SigninInput';
 import {useNavigation} from '@react-navigation/native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import VideoPlayer from 'react-native-video-player';
-import RNFS from 'react-native-fs';
-import {Text} from 'react-native';
-import RNFetchBlob from 'rn-fetch-blob';
+import Api from '../../services/Api';
+import AsyncStorage from '@react-native-community/async-storage';
+import {UserContext} from '../../contexts/UserContext';
 
-export default ({route}) => {
+export default () => {
   const navigation = useNavigation();
-  const [teste, setTeste] = React.useState();
-  const [student, setStudent] = React.useState({});
+  const {state: resultUser} = React.useContext(UserContext);
   const [nameField, setNameField] = React.useState('');
   const [typeField, setTypeField] = React.useState('');
   const [videoField, setVideoField] = React.useState();
-
-  React.useEffect(() => {
-    setStudent(route.params);
-  }, []);
+  const [preVideo, setPrevideo] = React.useState();
 
   const handleAddTraining = async () => {
+    const personalId = resultUser?.id;
     const token = await AsyncStorage.getItem('token');
 
-    const personalId = user.id;
+    if (nameField != '' && typeField != '') {
+      console.log(videoField);
+      let res = await Api.createTraining(
+        typeField,
+        nameField,
+        videoField,
+        personalId,
+        token,
+      );
 
-    if (nameField != '' && typeField != '' && videoField != '') {
-      // let res = await Api.addTraining(
-      //   nameField,
-      //   typeField,
-      //   videoField,
-      //   student.id,
-      //   personalId,
-      //   token,
-      // );
+      console.log(res);
 
-      // if (res) {
-      //   alert('Treino cadastrado!');
+      if (res) {
+        alert('Vídeo cadastrado!');
 
-      //   navigation.navigate('Home');
-      // } else {
-      //   alert('Error: ' + res.error);
-      // }
-
-      console.log('Foi');
+        navigation.navigate('Home');
+      } else {
+        alert('Error: ' + res.error);
+      }
     } else {
       alert('Preencha todos os campos!');
     }
@@ -65,26 +61,19 @@ export default ({route}) => {
   };
 
   const imagePickerCallback = async data => {
-    console.log(data);
     const video = data;
     const formdata = new FormData();
     formdata.append('videoFile', {
       uri: video.assets[0].uri,
-      type: 'video.mp4',
-      name: video.assets[0].fileName,
+      type: video.assets[0].type,
+      name: video.assets[0].fileName + '.mp4',
     });
 
-    setVideoField(formdata);
+    setPrevideo(formdata);
 
-    RNFS.readFile(video.assets[0].uri, 'base64')
-      .then(res => {
-        setTeste(res);
-      })
-      .catch(err => {
-        console.log(err.message, err.code);
-      });
+    let res = await Api.uploadVideo(formdata);
 
-    console.log(formdata._parts[0], 'formdata');
+    setVideoField(res);
   };
 
   const options = {
@@ -96,7 +85,7 @@ export default ({route}) => {
   return (
     <Container>
       <TextTitle>BE FIT</TextTitle>
-      <TitleForm>Cadastrar treino para </TitleForm>
+      <TitleForm>Cadastrar treino</TitleForm>
       <InputArea>
         <SigninInput
           placeholder="Nome do treino"
@@ -112,11 +101,11 @@ export default ({route}) => {
           marginOne
         />
 
-        <UploadButton>
-          <TextUploadVideo
-            onPress={() => {
-              launchImageLibrary(options, imagePickerCallback);
-            }}>
+        <UploadButton
+          onPress={() => {
+            launchImageLibrary(options, imagePickerCallback);
+          }}>
+          <TextUploadVideo>
             + Upload do vídeo
             <TextVideoExist style={{color: videoField ? '#ADFF2F' : 'red'}}>
               {videoField ? '\nVÍDEO CARREGADO' : '\nSEM VÍDEO'}
@@ -124,22 +113,25 @@ export default ({route}) => {
           </TextUploadVideo>
         </UploadButton>
 
-        <CustomButton onPress={handleAddTraining}>
+        {preVideo && (
+          <>
+            <TextPreVideo>Pré visualização</TextPreVideo>
+            <VideoPlayer
+              video={{
+                uri: preVideo._parts[0][1].uri,
+                // uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+              }}
+              videoWidth={1600}
+              videoHeight={900}
+              disableFullscreen={false}
+            />
+          </>
+        )}
+
+        <CustomButton disabled={!videoField} onPress={handleAddTraining}>
           <CustomButtonText>Adicionar treino</CustomButtonText>
         </CustomButton>
         <TextEdit onPress={handleGoHome}>Cancelar</TextEdit>
-
-        {videoField && (
-          <VideoPlayer
-            video={{
-              uri: videoField._parts[0][1].uri,
-              // uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-            }}
-            videoWidth={1600}
-            videoHeight={900}
-            disableFullscreen={false}
-          />
-        )}
       </InputArea>
     </Container>
   );

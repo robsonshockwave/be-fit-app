@@ -8,8 +8,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const TextTitle = styled.Text`
-  position: absolute;
-  top: 50px;
+  margin-bottom: 0px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
@@ -79,4 +78,12 @@ export const TextVideoExist = styled.Text`
   text-align: center;
   font-size: 12px;
   font-weight: bold;
+`;
+
+export const TextPreVideo = styled.Text`
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  padding-top: 12px;
+  padding-bottom: 5px;
 `;
