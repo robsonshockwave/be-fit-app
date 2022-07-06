@@ -110,7 +110,12 @@ export default () => {
           radiusTop
         />
 
-        <SelectInput options={category} setOption={onSetTypeField} marginOne />
+        <SelectInput
+          placeholder={'Selecione a categoria'}
+          options={category}
+          setOption={onSetTypeField}
+          marginOne
+        />
 
         <UploadButton
           onPress={() => {

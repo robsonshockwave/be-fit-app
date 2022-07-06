@@ -1,7 +1,14 @@
 import React from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 
-export default ({options, setOption, marginOne, radiusTop, radiusBottom}) => {
+export default ({
+  placeholder,
+  options,
+  setOption,
+  marginOne,
+  radiusTop,
+  radiusBottom,
+}) => {
   return (
     <SelectDropdown
       data={options}
@@ -29,11 +36,11 @@ export default ({options, setOption, marginOne, radiusTop, radiusBottom}) => {
         marginRight: 12,
       }}
       search
-      searchPlaceHolder={'Pesquise a categoria'}
+      searchPlaceHolder={'Pesquise a opção'}
       searchInputStyle={{borderRadius: 10}}
       dropdownStyle={{borderRadius: 10}}
       rowTextStyle={{color: '#4f5967', fontSize: 15}}
-      defaultButtonText={'Selecione a categoria'}
+      defaultButtonText={placeholder}
     />
   );
 };

@@ -279,4 +279,32 @@ export default {
       return;
     }
   },
+  addTrainingToStudent: async (
+    day,
+    gymStudentId,
+    category,
+    token,
+    PersonalId,
+  ) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/workout/create`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({
+          category,
+          day,
+          PersonalId: PersonalId.toString(),
+          gymStudentId: gymStudentId.toString(),
+        }),
+      });
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
 };
