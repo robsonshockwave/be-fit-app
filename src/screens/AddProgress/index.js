@@ -14,7 +14,6 @@ import Api from '../../services/Api';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
-import {Alert} from 'react-native';
 
 export default () => {
   const navigation = useNavigation();
@@ -48,14 +47,14 @@ export default () => {
       );
 
       if (res) {
-        Alert.alert('Eba!', 'Progresso cadastrado!');
+        alert('Progresso cadastrado!');
 
         navigation.navigate('Home');
       } else {
-        Alert.alert('Ops!', 'Deu erro!');
+        alert('Deu erro!');
       }
     } else {
-      Alert.alert('Epa!', 'Preencha todos os campos!');
+      alert('Preencha todos os campos!');
     }
   };
 
@@ -82,25 +81,25 @@ export default () => {
           marginOne
         />
         <SigninInput
-          placeholder="Braço (Circunferência)"
+          placeholder="Braço"
           value={armsField}
           onChangeText={t => setArmsField(t)}
           marginOne
         />
         <SigninInput
-          placeholder="Perna (Circunferência)"
+          placeholder="Perna"
           value={legsField}
           onChangeText={t => setLegsField(t)}
           marginOne
         />
         <SigninInput
-          placeholder="Cintura (Circunferência)"
+          placeholder="Cintura"
           value={waistField}
           onChangeText={t => setWaistField(t)}
           marginOne
         />
         <SigninInput
-          placeholder="Peito (Circunferência)"
+          placeholder="Peito"
           value={chestField}
           onChangeText={t => setChestField(t)}
           marginOne
