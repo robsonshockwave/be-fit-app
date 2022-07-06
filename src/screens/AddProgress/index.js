@@ -48,12 +48,11 @@ export default () => {
       );
 
       if (res) {
-
         Alert.alert('Eba!', 'Progresso cadastrado!');
 
         navigation.navigate('Home');
       } else {
-        Alert.alert('Ops!', 'Deu erro!');
+        Alert.alert('Ops!', 'Deu erro ao cadastrar progresso!');
       }
     } else {
       Alert.alert('Epa!', 'Preencha todos os campos!');
@@ -83,33 +82,26 @@ export default () => {
           marginOne
         />
         <SigninInput
-
           placeholder="Braço (Circunferência)"
-
           value={armsField}
           onChangeText={t => setArmsField(t)}
           marginOne
         />
         <SigninInput
-
           placeholder="Perna (Circunferência)"
-
+          placeholder="Perna (Circunferência)"
           value={legsField}
           onChangeText={t => setLegsField(t)}
           marginOne
         />
         <SigninInput
-
           placeholder="Cintura (Circunferência)"
-
           value={waistField}
           onChangeText={t => setWaistField(t)}
           marginOne
         />
         <SigninInput
-
           placeholder="Peito (Circunferência)"
-
           value={chestField}
           onChangeText={t => setChestField(t)}
           marginOne

@@ -20,6 +20,7 @@ import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
 import {Alert} from 'react-native';
+import SelectInput from '../../components/SelectInput';
 
 export default () => {
   const navigation = useNavigation();
@@ -77,11 +78,24 @@ export default () => {
     setVideoField(res);
   };
 
+  const onSetTypeField = option => {
+    setTypeField(option);
+  };
+
   const options = {
     mediaType: 'video',
     videoQuality: 'low',
     includeBase64: true,
   };
+
+  const category = [
+    'Peito, triceps e abdomem',
+    'Costas e biceps',
+    'Perna',
+    'Ombro e abdomen',
+    'Triceps e Biceps',
+    'Perna e abdomem',
+  ];
 
   return (
     <Container>
@@ -95,10 +109,11 @@ export default () => {
           marginOne
           radiusTop
         />
-        <SigninInput
-          placeholder="Tipo do treino"
-          value={typeField}
-          onChangeText={t => setTypeField(t)}
+
+        <SelectInput
+          placeholder={'Selecione a categoria'}
+          options={category}
+          setOption={onSetTypeField}
           marginOne
         />
 

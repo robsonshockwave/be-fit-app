@@ -12,6 +12,7 @@ import Training from '../screens/Training';
 import VideoTraining from '../screens/VideoTraining';
 import VerifyProgress from '../screens/VerifyProgress';
 import ListTraining from '../screens/ListTraining';
+import AddTraining from '../screens/AddTraining';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,6 +34,7 @@ export default () => {
       <Tab.Screen name="VideoTraining" component={VideoTraining} />
       <Tab.Screen name="VerifyProgress" component={VerifyProgress} />
       <Tab.Screen name="ListTraining" component={ListTraining} />
+      <Tab.Screen name="AddTraining" component={AddTraining} />
     </Tab.Navigator>
   );
 };

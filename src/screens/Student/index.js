@@ -45,12 +45,12 @@ export default ({route}) => {
 
       <AddTrainingButton
         onPress={() => {
-          // navigation.navigate('Training', {
-          //   id: student.id,
-          //   name: student.name,
-          // });
+          navigation.navigate('AddTraining', {
+            id: student.id,
+            name: student.name,
+          });
         }}>
-        <TextAddTraining>Adicionar treino</TextAddTraining>
+        <TextAddTraining>Adicionar treino ao aluno</TextAddTraining>
       </AddTrainingButton>
     </Container>
   );
