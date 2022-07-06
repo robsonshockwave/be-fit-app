@@ -25,7 +25,7 @@ export const InputArea = styled.View`
 `;
 
 export const CustomButton = styled.TouchableOpacity`
-  margin-top: 27px;
+  margin-top: 23px;
   background: #30a960;
   border-radius: 10px;
   height: 48px;
@@ -37,7 +37,7 @@ export const CustomButtonText = styled.Text`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
   text-align: center;
   color: #fff;
@@ -54,6 +54,6 @@ export const TextTypeUser = styled.Text`
   font-size: 14px;
   text-align: center;
   color: #30a960;
-  padding: 12px 0;
+  padding: 20px 0 12px;
   font-weight: 700;
 `;

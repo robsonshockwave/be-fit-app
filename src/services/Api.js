@@ -1,4 +1,5 @@
-const BASE_API = 'http://10.0.2.2:3000';
+const BASE_API = 'https://api-be-fit-dev.up.railway.app';
+// const BASE_API = 'http://10.0.2.2:3000';
 
 export default {
   checkToken: async token => {
@@ -101,7 +102,7 @@ export default {
           Authorization: `${token}`,
         },
       });
-      console.log(res);
+      console.log(res, 'LISTA DE ESTUDANTES');
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -155,7 +156,123 @@ export default {
         },
         body: JSON.stringify({name, password, email}),
       });
-      console.log(res, 'hbsdhbfdshbdfshjubsdjfujnhfsdjnfdsjn');
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  getAllVideos: async (id, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/video/list/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      });
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  uploadVideo: async file => {
+    try {
+      let res = await fetch(`${BASE_API}/api/video/upload/aws`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+        body: file,
+      });
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  createTraining: async (category, name, url, PersonalId, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/video/create`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({category, name, url, PersonalId}),
+      });
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  deleteTraining: async (id, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/video/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      });
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  addProgressStudent: async (
+    weight,
+    height,
+    arms,
+    legs,
+    waist,
+    chest,
+    gymStudentId,
+    token,
+  ) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/datastudent/create`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({
+          weight,
+          height,
+          arms,
+          legs,
+          waist,
+          chest,
+          gymStudentId: gymStudentId.toString(),
+        }),
+      });
+      console.log(await res.json());
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  getListProgress: async (id, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/datastudent/list/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      });
+      console.log(await res.json());
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);

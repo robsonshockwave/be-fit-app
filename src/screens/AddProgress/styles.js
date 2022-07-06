@@ -5,7 +5,12 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: -40px;
+  margin-top: -60px;
+`;
+
+export const InputArea = styled.View`
+  padding: 15px 50px;
+  width: 100%;
 `;
 
 export const TextTitle = styled.Text`
@@ -15,11 +20,8 @@ export const TextTitle = styled.Text`
   font-size: 32px;
   line-height: 39px;
   color: #4f5967;
-`;
-
-export const InputArea = styled.View`
-  padding: 0 50px;
-  width: 100%;
+  text-align: center;
+  margin-top: 30px;
 `;
 
 export const CustomButton = styled.TouchableOpacity`
@@ -35,7 +37,7 @@ export const CustomButtonText = styled.Text`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
   text-align: center;
   color: #fff;
@@ -43,7 +45,6 @@ export const CustomButtonText = styled.Text`
 
 export const TitleForm = styled.Text`
   text-align: center;
-  padding-bottom: 14px;
   font-size: 16px;
   color: #30a960;
   font-weight: bold;

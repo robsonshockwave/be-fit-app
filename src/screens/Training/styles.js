@@ -5,10 +5,10 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: -40px;
 `;
 
 export const TextTitle = styled.Text`
+  margin-bottom: 0px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
@@ -18,7 +18,7 @@ export const TextTitle = styled.Text`
 `;
 
 export const InputArea = styled.View`
-  padding: 0 50px;
+  padding: 15px 50px;
   width: 100%;
 `;
 
@@ -35,7 +35,7 @@ export const CustomButtonText = styled.Text`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
   text-align: center;
   color: #fff;
@@ -43,7 +43,6 @@ export const CustomButtonText = styled.Text`
 
 export const TitleForm = styled.Text`
   text-align: center;
-  padding-bottom: 14px;
   font-size: 16px;
   color: #30a960;
   font-weight: bold;
@@ -56,4 +55,35 @@ export const TextEdit = styled.Text`
   color: #4f5967;
   text-decoration: dashed;
   font-weight: 500;
+`;
+
+export const UploadButton = styled.TouchableOpacity`
+  margin-top: 2px;
+  background: grey;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextUploadVideo = styled.Text`
+  text-align: center;
+  font-size: 14px;
+  color: #fff7f7;
+  font-weight: 500;
+`;
+
+export const TextVideoExist = styled.Text`
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+export const TextPreVideo = styled.Text`
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  padding-top: 12px;
+  padding-bottom: 5px;
 `;

@@ -74,8 +74,8 @@ export const TextAddStudentButton = styled.Text`
   color: #30a960;
 `;
 
-export const StudentsView = styled.ScrollView`
-  margin-bottom: 310px;
+export const AreaView = styled.ScrollView`
+  height: 400px;
 `;
 
 export const TextBold = styled.Text`
@@ -97,7 +97,7 @@ export const DeleteStudentButton = styled.TouchableOpacity`
   z-index: 2;
 `;
 
-export const StudentCard = styled.View`
+export const StudentCard = styled.TouchableOpacity`
   flex-direction: row;
   height: 67px;
   margin: 10px 30px 4px;
@@ -128,4 +128,92 @@ export const ImageDayExercise = styled.Image`
   margin: 0 30px;
   max-width: 376px;
   height: 230px;
+`;
+
+export const WrapperLastTraining = styled.View`
+  background-color: #30a960;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 30px 10px;
+  border-radius: 10px;
+`;
+
+export const TextLastTraining = styled.Text`
+  font-size: 17px;
+  color: #fff;
+  font-weight: bold;
+`;
+
+export const CardTraining = styled.TouchableOpacity`
+  margin: 5px 30px;
+  background-color: #fff;
+  border-radius: 10px;
+`;
+
+export const TextTypeTraining = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px 5px;
+`;
+
+export const TextNameTraining = styled.Text`
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0px 20px 0px;
+`;
+
+export const TextDateTraining = styled.Text`
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0px 20px 12px;
+`;
+
+export const CustomButton = styled.TouchableOpacity`
+  margin-top: 16px;
+  background: #30a960;
+  border-radius: 10px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  width: 170px;
+`;
+
+export const CustomButtonTwo = styled.TouchableOpacity`
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #30a960;
+  border-radius: 10px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  width: 170px;
+`;
+
+export const CustomButtonText = styled.Text`
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
+`;
+
+export const CustomButtonTextTwo = styled.Text`
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #30a960;
+`;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+  margin: 0 30px;
+  justify-content: space-between;
 `;

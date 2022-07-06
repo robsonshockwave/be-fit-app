@@ -1,11 +1,11 @@
 import React from 'react';
-import {Container} from './styles';
-import {Text} from 'react-native';
+import {Container, ImageChat} from './styles';
+import CHAT from '../../assets/chat.png';
 
 export default () => {
   return (
     <Container>
-      <Text>Chat</Text>
+      <ImageChat source={CHAT} />
     </Container>
   );
 };

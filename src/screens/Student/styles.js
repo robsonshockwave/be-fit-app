@@ -36,7 +36,7 @@ export const TextVerifyProgress = styled.Text`
 `;
 
 export const WrapperStudentRecord = styled.View`
-  margin: 5px 30px;
+  margin: 20px 30px;
   border-radius: 10px;
   background-color: #fff;
   padding: 20px;
@@ -45,9 +45,9 @@ export const WrapperStudentRecord = styled.View`
 export const TextRecordTitle = styled.Text`
   font-size: 17px;
   color: #4f5967;
-  margin-top: -5px;
-  padding-bottom: 7px;
+  padding-bottom: 10px;
   font-weight: bold;
+  margin-top: -5px;
 `;
 
 export const TextRecord = styled.Text`
@@ -57,14 +57,16 @@ export const TextRecord = styled.Text`
   font-weight: 300;
 `;
 
-export const TextType = styled.Text`
-  font-size: 14px;
-  color: #4f5967;
-  padding: 5px 0;
-  font-weight: bold;
+export const AddTrainingButton = styled.TouchableOpacity`
+  background-color: #30a960;
+  margin: 5px 30px;
+  border-radius: 10px;
 `;
 
-export const ProgressView = styled.ScrollView`
-  margin-top: 20px;
-  height: 565px;
+export const TextAddTraining = styled.Text`
+  padding: 12px;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
 `;

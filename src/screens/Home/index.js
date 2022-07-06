@@ -2,31 +2,41 @@ import React from 'react';
 import {
   AddStudentButton,
   ButtonLogout,
+  ButtonsContainer,
+  CardTraining,
   Container,
+  CustomButton,
+  CustomButtonText,
+  CustomButtonTextTwo,
+  CustomButtonTwo,
   DeleteStudentButton,
   HeaderTitle,
   ImageDayExercise,
   StudentCard,
   StudentGoal,
   StudentName,
-  StudentsView,
+  AreaView,
   StudentWrapper,
   TextAddStudentButton,
   TextBold,
+  TextDateTraining,
   TextGoTrain,
   TextHello,
+  TextLastTraining,
   TextList,
   TextLogout,
+  TextNameTraining,
+  TextTypeTraining,
   WrapperHeader,
+  WrapperLastTraining,
   WrapperTitleList,
 } from './styles.';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import DeleteIcon from '../../assets/delete-icon.svg';
-import {RefreshControl} from 'react-native';
+import {Alert, RefreshControl, Text, View} from 'react-native';
 import Api from '../../services/Api';
 import {UserContext} from '../../contexts/UserContext';
-import DayExercise from '../../assets/dayExercise.png';
 
 export default () => {
   const navigation = useNavigation();
@@ -48,7 +58,8 @@ export default () => {
     if (res) {
       setListStudents(res);
     } else {
-      alert(
+      Alert.alert(
+        'Ops!',
         'Ops, ocorreu um erro ao carregar a lista de alunos!\n\n' + res.error,
       );
     }
@@ -61,7 +72,7 @@ export default () => {
     if (res) {
       requestListStudents();
     } else {
-      alert('Ops, ocorreu um erro ao deletar o aluno!');
+      Alert.alert('Ops!', 'Ops, ocorreu um erro ao deletar o aluno!');
     }
   };
 
@@ -97,28 +108,69 @@ export default () => {
               <TextAddStudentButton>Adicionar aluno</TextAddStudentButton>
             </AddStudentButton>
           </WrapperTitleList>
-          <StudentsView
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }>
-            {listStudents.map((values, index) => (
-              <StudentCard key={index}>
-                <StudentWrapper>
-                  <StudentName>{values.name}</StudentName>
-                  <StudentGoal>{values.goals}</StudentGoal>
-                </StudentWrapper>
-                <DeleteStudentButton
-                  onPress={() => handleDeleteStudent(values.id)}>
-                  <DeleteIcon fill="red" height="28" width="28" />
-                </DeleteStudentButton>
-              </StudentCard>
-            ))}
-          </StudentsView>
+          <>
+            <AreaView
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }>
+              {listStudents &&
+                listStudents?.map((values, index) => (
+                  <StudentCard
+                    key={index}
+                    onPress={() => {
+                      navigation.navigate('Student', {
+                        id: values.id,
+                        name: values.name,
+                        goals: values.goals,
+                        index: index,
+                      });
+                    }}>
+                    <StudentWrapper>
+                      <StudentName>{values.name}</StudentName>
+                      <StudentGoal>{values.goals}</StudentGoal>
+                    </StudentWrapper>
+                    <DeleteStudentButton
+                      onPress={() => handleDeleteStudent(values.id)}>
+                      <DeleteIcon fill="red" height="28" width="28" />
+                    </DeleteStudentButton>
+                  </StudentCard>
+                ))}
+            </AreaView>
+            <ButtonsContainer>
+              <CustomButton
+                onPress={() => {
+                  navigation.navigate('Training');
+                }}>
+                <CustomButtonText>Adicionar vídeo</CustomButtonText>
+              </CustomButton>
+              <CustomButtonTwo
+                onPress={() => {
+                  navigation.navigate('ListTraining');
+                }}>
+                <CustomButtonTextTwo>Treinos registrados</CustomButtonTextTwo>
+              </CustomButtonTwo>
+            </ButtonsContainer>
+          </>
         </>
       ) : (
         <>
           <TextGoTrain>Bora treinar</TextGoTrain>
-          <ImageDayExercise source={DayExercise} />
+          <WrapperLastTraining>
+            <TextLastTraining>↓ Últimos treinos postados ↓</TextLastTraining>
+          </WrapperLastTraining>
+          <AreaView
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
+            }>
+            <CardTraining
+              onPress={() => {
+                navigation.navigate('VideoTraining');
+              }}>
+              <TextTypeTraining>🏋️‍♀️ Tipo: </TextTypeTraining>
+              <TextNameTraining>Nome do treino</TextNameTraining>
+              <TextDateTraining>Dia: </TextDateTraining>
+            </CardTraining>
+          </AreaView>
         </>
       )}
     </Container>

@@ -13,6 +13,7 @@ import Api from '../../services/Api';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
+import {Alert} from 'react-native';
 
 export default () => {
   const navigation = useNavigation();
@@ -43,14 +44,14 @@ export default () => {
       );
 
       if (res) {
-        alert('Aluno cadastrado!');
+        Alert.alert('Eba!', 'Aluno cadastrado!');
 
         navigation.navigate('Home');
       } else {
-        alert('Error: ' + res.error);
+        Alert.alert('Ops!', 'Error: ' + res.error);
       }
     } else {
-      alert('Preencha todos os campos!');
+      Alert.alert('Epa!', 'Preencha todos os campos!');
     }
   };
 
@@ -82,6 +83,7 @@ export default () => {
           value={emailField}
           onChangeText={t => setEmailField(t)}
           marginOne
+          // radiusBottom
         />
         <SigninInput
           placeholder="Senha"

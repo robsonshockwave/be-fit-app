@@ -48,6 +48,7 @@ export default () => {
       );
 
       if (res) {
+
         Alert.alert('Eba!', 'Progresso cadastrado!');
 
         navigation.navigate('Home');
@@ -82,25 +83,33 @@ export default () => {
           marginOne
         />
         <SigninInput
+
           placeholder="Braço (Circunferência)"
+
           value={armsField}
           onChangeText={t => setArmsField(t)}
           marginOne
         />
         <SigninInput
+
           placeholder="Perna (Circunferência)"
+
           value={legsField}
           onChangeText={t => setLegsField(t)}
           marginOne
         />
         <SigninInput
+
           placeholder="Cintura (Circunferência)"
+
           value={waistField}
           onChangeText={t => setWaistField(t)}
           marginOne
         />
         <SigninInput
+
           placeholder="Peito (Circunferência)"
+
           value={chestField}
           onChangeText={t => setChestField(t)}
           marginOne

@@ -13,6 +13,7 @@ import {UserContext} from '../../contexts/UserContext';
 import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
+import {Alert} from 'react-native';
 
 export default () => {
   const navigation = useNavigation();
@@ -56,13 +57,13 @@ export default () => {
             },
           });
 
-          alert('Dados atualizado!');
+          Alert.alert('Eba!', 'Dados atualizado!');
           navigation.navigate('Home');
         } else {
-          alert('Error: ' + res.error);
+          Alert.alert('Ops!', 'Error: ' + res.error);
         }
       } else {
-        alert('Preencha os campos!');
+        Alert.alert('Epa!', 'Preencha os campos!');
       }
     } else {
       if (nameField != '' && emailField != '' && passwordField != '') {
@@ -90,13 +91,13 @@ export default () => {
             },
           });
 
-          alert('Dados atualizados!');
+          Alert.alert('Eba!', 'Dados atualizados!');
           navigation.navigate('Home');
         } else {
-          alert('Error: ' + res.error);
+          Alert.alert('Ops!', 'Error: ' + res.error);
         }
       } else {
-        alert('Preencha os campos!');
+        Alert.alert('Epa!', 'Preencha os campos!');
       }
 
       setEditProfile(false);
@@ -138,6 +139,7 @@ export default () => {
               }}
               marginOne
               radiusTop
+              ma
             />
             {useType === 'P' && (
               <SigninInput
