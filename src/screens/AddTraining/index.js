@@ -14,6 +14,7 @@ import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
 import {Alert} from 'react-native';
+import SelectInput from '../../components/SelectInput';
 
 export default ({route}) => {
   const navigation = useNavigation();
@@ -50,20 +51,33 @@ export default ({route}) => {
     navigation.navigate('Home');
   };
 
+  const onSetTypeField = option => {
+    setTypeField(option);
+  };
+
+  const options = [
+    'Peito, triceps e abdomem',
+    'Costas e biceps',
+    'Perna',
+    'Ombro e abdomen',
+    'Triceps e Biceps',
+    'Perna e abdomem',
+  ];
+
   return (
     <Container>
       <TextTitle>BE FIT</TextTitle>
-      <TitleForm>🤸‍♂️ Adicionar treino para o aluno {student.name}</TitleForm>
+      <TitleForm>
+        🤸‍♂️ Adicionar treino para o aluno{'\n'} {student.name}
+      </TitleForm>
       <InputArea>
-        <SigninInput
-          placeholder="Categoria"
-          value={typeField}
-          onChangeText={t => setTypeField(t)}
+        <SelectInput
+          options={options}
+          setOption={onSetTypeField}
           marginOne
           radiusTop
           radiusBottom
         />
-
         <CustomButton onPress={handleAddTraining}>
           <CustomButtonText>Adicionar treino</CustomButtonText>
         </CustomButton>

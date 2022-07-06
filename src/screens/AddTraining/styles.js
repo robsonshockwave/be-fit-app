@@ -46,7 +46,7 @@ export const TitleForm = styled.Text`
   font-size: 16px;
   color: #30a960;
   font-weight: bold;
-  padding-top: 10px;
+  padding-top: 5px;
 `;
 
 export const TextEdit = styled.Text`
