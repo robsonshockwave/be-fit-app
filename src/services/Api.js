@@ -252,8 +252,25 @@ export default {
           legs,
           waist,
           chest,
-          gymStudentId,
+          gymStudentId: gymStudentId.toString(),
         }),
+      });
+      console.log(await res.json());
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  getListProgress: async (id, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/datastudent/list/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
       });
       console.log(await res.json());
       return await res.json();

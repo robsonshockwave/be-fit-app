@@ -20,6 +20,7 @@ import RadioForm, {
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import jwt_decode from 'jwt-decode';
+import {Alert} from 'react-native';
 
 export default () => {
   const {dispatch: userDispatch, state: user} = React.useContext(UserContext);
@@ -67,10 +68,10 @@ export default () => {
           routes: [{name: 'MainTab'}],
         });
       } else {
-        alert('E-mail e/ou senha inválidos!');
+        Alert.alert('Epa!', 'E-mail e/ou senha inválidos!');
       }
     } else {
-      alert('Preencha os campos!');
+      Alert.alert('Epa!', 'Preencha os campos!');
     }
   };
 

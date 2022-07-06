@@ -24,8 +24,8 @@ export default ({route}) => {
   return (
     <Container>
       <WrapperTitle>
-        <TextName>{student.name}</TextName>
-        <VerifyProgressButton
+        <TextName>🤓 {student.name}</TextName>
+        {/* <VerifyProgressButton
           onPress={() => {
             navigation.navigate('VerifyProgress', {
               studentId: student.id,
@@ -33,7 +33,7 @@ export default ({route}) => {
             });
           }}>
           <TextVerifyProgress>Verificar progresso</TextVerifyProgress>
-        </VerifyProgressButton>
+        </VerifyProgressButton> */}
       </WrapperTitle>
 
       <WrapperStudentRecord>

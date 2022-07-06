@@ -12,7 +12,7 @@ import {
 } from './styles';
 import DeleteIcon from '../../assets/delete-icon.svg';
 import {UserContext} from '../../contexts/UserContext';
-import {RefreshControl} from 'react-native';
+import {Alert, RefreshControl} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../../services/Api';
 
@@ -36,7 +36,7 @@ export default () => {
     if (res) {
       requestListTrainings();
     } else {
-      alert('Ops, ocorreu um erro ao deletar o treino!');
+      Alert.alert('Ops!', 'Ops, ocorreu um erro ao deletar o treino!');
     }
   };
 

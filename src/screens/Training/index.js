@@ -19,6 +19,7 @@ import VideoPlayer from 'react-native-video-player';
 import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
+import {Alert} from 'react-native';
 
 export default () => {
   const navigation = useNavigation();
@@ -45,14 +46,14 @@ export default () => {
       console.log(res);
 
       if (res) {
-        alert('Vídeo cadastrado!');
+        Alert.alert('Eba!', 'Vídeo cadastrado!');
 
         navigation.navigate('Home');
       } else {
-        alert('Error: ' + res.error);
+        Alert.alert('Ops!', 'Error: ' + res.error);
       }
     } else {
-      alert('Preencha todos os campos!');
+      Alert.alert('Epa!', 'Preencha todos os campos!');
     }
   };
 

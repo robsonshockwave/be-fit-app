@@ -15,7 +15,7 @@ import {
   StudentCard,
   StudentGoal,
   StudentName,
-  StudentsView,
+  AreaView,
   StudentWrapper,
   TextAddStudentButton,
   TextBold,
@@ -34,7 +34,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import DeleteIcon from '../../assets/delete-icon.svg';
-import {RefreshControl, Text, View} from 'react-native';
+import {Alert, RefreshControl, Text, View} from 'react-native';
 import Api from '../../services/Api';
 import {UserContext} from '../../contexts/UserContext';
 
@@ -58,7 +58,8 @@ export default () => {
     if (res) {
       setListStudents(res);
     } else {
-      alert(
+      Alert.alert(
+        'Ops!',
         'Ops, ocorreu um erro ao carregar a lista de alunos!\n\n' + res.error,
       );
     }
@@ -71,7 +72,7 @@ export default () => {
     if (res) {
       requestListStudents();
     } else {
-      alert('Ops, ocorreu um erro ao deletar o aluno!');
+      Alert.alert('Ops!', 'Ops, ocorreu um erro ao deletar o aluno!');
     }
   };
 
@@ -108,7 +109,7 @@ export default () => {
             </AddStudentButton>
           </WrapperTitleList>
           <>
-            <StudentsView
+            <AreaView
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }>
@@ -134,7 +135,7 @@ export default () => {
                     </DeleteStudentButton>
                   </StudentCard>
                 ))}
-            </StudentsView>
+            </AreaView>
             <ButtonsContainer>
               <CustomButton
                 onPress={() => {
@@ -157,7 +158,7 @@ export default () => {
           <WrapperLastTraining>
             <TextLastTraining>↓ Últimos treinos postados ↓</TextLastTraining>
           </WrapperLastTraining>
-          <StudentsView
+          <AreaView
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
             }>
@@ -167,9 +168,9 @@ export default () => {
               }}>
               <TextTypeTraining>🏋️‍♀️ Tipo: </TextTypeTraining>
               <TextNameTraining>Nome do treino</TextNameTraining>
-              <TextDateTraining>Data: </TextDateTraining>
+              <TextDateTraining>Dia: </TextDateTraining>
             </CardTraining>
-          </StudentsView>
+          </AreaView>
         </>
       )}
     </Container>

@@ -36,7 +36,7 @@ export const TextVerifyProgress = styled.Text`
 `;
 
 export const WrapperStudentRecord = styled.View`
-  margin: 30px;
+  margin: 5px 30px;
   border-radius: 10px;
   background-color: #fff;
   padding: 20px;
@@ -62,4 +62,9 @@ export const TextType = styled.Text`
   color: #4f5967;
   padding: 5px 0;
   font-weight: bold;
+`;
+
+export const ProgressView = styled.ScrollView`
+  margin-top: 20px;
+  height: 565px;
 `;

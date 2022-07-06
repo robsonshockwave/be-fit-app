@@ -36,7 +36,7 @@ export const TextVerifyProgress = styled.Text`
 `;
 
 export const WrapperStudentRecord = styled.View`
-  margin: 30px;
+  margin: 20px 30px;
   border-radius: 10px;
   background-color: #fff;
   padding: 20px;
@@ -47,6 +47,7 @@ export const TextRecordTitle = styled.Text`
   color: #4f5967;
   padding-bottom: 10px;
   font-weight: bold;
+  margin-top: -5px;
 `;
 
 export const TextRecord = styled.Text`
@@ -58,7 +59,7 @@ export const TextRecord = styled.Text`
 
 export const AddTrainingButton = styled.TouchableOpacity`
   background-color: #30a960;
-  margin: 0 30px;
+  margin: 5px 30px;
   border-radius: 10px;
 `;
 

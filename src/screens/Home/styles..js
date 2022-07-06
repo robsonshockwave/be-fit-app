@@ -74,8 +74,8 @@ export const TextAddStudentButton = styled.Text`
   color: #30a960;
 `;
 
-export const StudentsView = styled.ScrollView`
-  height: 395px;
+export const AreaView = styled.ScrollView`
+  height: 400px;
 `;
 
 export const TextBold = styled.Text`
@@ -146,7 +146,7 @@ export const TextLastTraining = styled.Text`
 `;
 
 export const CardTraining = styled.TouchableOpacity`
-  margin: 10px 30px;
+  margin: 5px 30px;
   background-color: #fff;
   border-radius: 10px;
 `;
