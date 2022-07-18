@@ -8,7 +8,7 @@ import {
   TextTitle,
   TitleForm,
 } from './styles';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
@@ -21,10 +21,11 @@ export default ({route}) => {
   const [typeField, setTypeField] = React.useState('');
   const [dayField, setDayField] = React.useState('');
   const [student, setStudent] = React.useState({});
+  const isFocused = useIsFocused();
 
   React.useEffect(() => {
     setStudent(route.params);
-  }, []);
+  }, [isFocused]);
 
   const handleAddTraining = async () => {
     const personalId = resultUser?.id;

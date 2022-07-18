@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   AddTrainingButton,
@@ -16,10 +16,11 @@ import {
 export default ({route}) => {
   const navigation = useNavigation();
   const [student, setStudent] = React.useState({});
+  const isFocused = useIsFocused();
 
   React.useEffect(() => {
     setStudent(route.params);
-  }, []);
+  }, [isFocused]);
 
   return (
     <Container>

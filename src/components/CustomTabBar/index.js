@@ -14,8 +14,6 @@ export default ({state, navigation}) => {
     navigation.navigate(screenName);
   };
 
-  console.log(state.index);
-
   return (
     <TabArea>
       <Container>

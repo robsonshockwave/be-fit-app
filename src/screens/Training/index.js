@@ -35,7 +35,6 @@ export default () => {
     const token = await AsyncStorage.getItem('token');
 
     if (nameField != '' && typeField != '') {
-      console.log(videoField);
       let res = await Api.createTraining(
         typeField,
         nameField,
@@ -43,8 +42,6 @@ export default () => {
         personalId,
         token,
       );
-
-      console.log(res);
 
       if (res) {
         Alert.alert('Eba!', 'Vídeo cadastrado!');

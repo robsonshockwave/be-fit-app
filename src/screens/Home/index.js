@@ -11,7 +11,6 @@ import {
   CustomButtonTwo,
   DeleteStudentButton,
   HeaderTitle,
-  ImageDayExercise,
   StudentCard,
   StudentGoal,
   StudentName,
@@ -25,16 +24,17 @@ import {
   TextLastTraining,
   TextList,
   TextLogout,
-  TextNameTraining,
   TextTypeTraining,
   WrapperHeader,
   WrapperLastTraining,
   WrapperTitleList,
+  TextTraining,
+  WrapTraining,
 } from './styles.';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import DeleteIcon from '../../assets/delete-icon.svg';
-import {Alert, RefreshControl, Text, View} from 'react-native';
+import {Alert, RefreshControl, Text} from 'react-native';
 import Api from '../../services/Api';
 import {UserContext} from '../../contexts/UserContext';
 
@@ -113,7 +113,6 @@ export default () => {
       </WrapperHeader>
       <TextHello>
         Olá, <TextBold>{resultUser.name}</TextBold>! 💪
-        {console.log(listTraining)}
       </TextHello>
 
       {resultUser?.useType === 'P' ? (
@@ -181,16 +180,26 @@ export default () => {
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
             }>
+            {console.log(listTraining)}
             {listTraining?.map((values, index) => (
               <CardTraining
                 key={index}
                 onPress={() => {
                   navigation.navigate('VideoTraining', {
-                    category: values?.category.trim(),
+                    category: values?.category && values?.category.trim(),
+                    name: values?.name ? values?.name.trim() : 'Sem treino',
+                    url: values?.url
+                      ? values?.url
+                      : 'https://www.youtube.com/watch?v=Hm5d0DcjFCo',
                   });
                 }}>
                 <TextTypeTraining>🏋️‍♀️ Tipo: {values?.category}</TextTypeTraining>
-                <TextNameTraining>Nome do treino</TextNameTraining>
+                <WrapTraining>
+                  <TextTraining>
+                    {values?.name ? values.name : 'Sem nome'}
+                  </TextTraining>
+                  <Text style={{fontSize: 12}}>Ver ➡️</Text>
+                </WrapTraining>
                 <TextDateTraining>Dia: {values?.day}</TextDateTraining>
               </CardTraining>
             ))}

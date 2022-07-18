@@ -157,10 +157,16 @@ export const TextTypeTraining = styled.Text`
   padding: 10px 20px 5px;
 `;
 
-export const TextNameTraining = styled.Text`
+export const WrapTraining = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px;
+`;
+
+export const TextTraining = styled.Text`
   font-size: 16px;
   font-weight: 500;
-  padding: 0px 20px 0px;
 `;
 
 export const TextDateTraining = styled.Text`
