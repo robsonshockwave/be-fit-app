@@ -8,12 +8,11 @@ import {
   TextTitle,
   TitleForm,
 } from './styles';
-import SigninInput from '../../components/SigninInput';
 import {useNavigation} from '@react-navigation/native';
 import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
-import {Alert} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 import SelectInput from '../../components/SelectInput';
 
 export default ({route}) => {
@@ -85,30 +84,37 @@ export default ({route}) => {
 
   return (
     <Container>
-      <TextTitle>BE FIT</TextTitle>
-      <TitleForm>
-        🤸‍♂️ Adicionar treino para o aluno{'\n'} {student.name}
-      </TitleForm>
-      <InputArea>
-        <SelectInput
-          options={days}
-          setOption={onSetDayField}
-          marginOne
-          radiusTop
-          placeholder={'Selecione o dia da semana'}
-        />
-        <SelectInput
-          options={category}
-          setOption={onSetTypeField}
-          marginOne
-          radiusBottom
-          placeholder={'Selecione a categoria'}
-        />
-        <CustomButton onPress={handleAddTraining}>
-          <CustomButtonText>Adicionar treino</CustomButtonText>
-        </CustomButton>
-        <TextEdit onPress={handleGoHome}>Cancelar</TextEdit>
-      </InputArea>
+      <ScrollView
+        style={{
+          flex: 1,
+          width: '100%',
+          marginBottom: 100,
+        }}>
+        <TextTitle>BE FIT</TextTitle>
+        <TitleForm>
+          🤸‍♂️ Adicionar treino para o aluno{'\n'} {student.name}
+        </TitleForm>
+        <InputArea>
+          <SelectInput
+            options={days}
+            setOption={onSetDayField}
+            marginOne
+            radiusTop
+            placeholder={'Selecione o dia da semana'}
+          />
+          <SelectInput
+            options={category}
+            setOption={onSetTypeField}
+            marginOne
+            radiusBottom
+            placeholder={'Selecione a categoria'}
+          />
+          <CustomButton onPress={handleAddTraining}>
+            <CustomButtonText>Adicionar treino</CustomButtonText>
+          </CustomButton>
+          <TextEdit onPress={handleGoHome}>Cancelar</TextEdit>
+        </InputArea>
+      </ScrollView>
     </Container>
   );
 };

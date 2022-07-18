@@ -14,7 +14,7 @@ import Api from '../../services/Api';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
-import {Alert} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 
 export default () => {
   const navigation = useNavigation();
@@ -65,54 +65,60 @@ export default () => {
 
   return (
     <Container>
-      <TextTitle>BE FIT</TextTitle>
-      <TitleForm>Cadastrar Progresso</TitleForm>
-      <InputArea>
-        <SigninInput
-          placeholder="Peso"
-          value={weightField}
-          onChangeText={t => setWeightField(t)}
-          marginOne
-          radiusTop
-        />
-        <SigninInput
-          placeholder="Altura"
-          value={heightField}
-          onChangeText={t => setHeightField(t)}
-          marginOne
-        />
-        <SigninInput
-          placeholder="Braço (Circunferência)"
-          value={armsField}
-          onChangeText={t => setArmsField(t)}
-          marginOne
-        />
-        <SigninInput
-          placeholder="Perna (Circunferência)"
-          placeholder="Perna (Circunferência)"
-          value={legsField}
-          onChangeText={t => setLegsField(t)}
-          marginOne
-        />
-        <SigninInput
-          placeholder="Cintura (Circunferência)"
-          value={waistField}
-          onChangeText={t => setWaistField(t)}
-          marginOne
-        />
-        <SigninInput
-          placeholder="Peito (Circunferência)"
-          value={chestField}
-          onChangeText={t => setChestField(t)}
-          marginOne
-          radiusBottom
-        />
+      <ScrollView
+        style={{
+          flex: 1,
+          width: '100%',
+          marginBottom: 100,
+        }}>
+        <TextTitle>BE FIT</TextTitle>
+        <TitleForm>Cadastrar Progresso</TitleForm>
+        <InputArea>
+          <SigninInput
+            placeholder="Peso"
+            value={weightField}
+            onChangeText={t => setWeightField(t)}
+            marginOne
+            radiusTop
+          />
+          <SigninInput
+            placeholder="Altura"
+            value={heightField}
+            onChangeText={t => setHeightField(t)}
+            marginOne
+          />
+          <SigninInput
+            placeholder="Braço (Circunferência)"
+            value={armsField}
+            onChangeText={t => setArmsField(t)}
+            marginOne
+          />
+          <SigninInput
+            placeholder="Perna (Circunferência)"
+            value={legsField}
+            onChangeText={t => setLegsField(t)}
+            marginOne
+          />
+          <SigninInput
+            placeholder="Cintura (Circunferência)"
+            value={waistField}
+            onChangeText={t => setWaistField(t)}
+            marginOne
+          />
+          <SigninInput
+            placeholder="Peito (Circunferência)"
+            value={chestField}
+            onChangeText={t => setChestField(t)}
+            marginOne
+            radiusBottom
+          />
 
-        <CustomButton onPress={handleSignClick}>
-          <CustomButtonText>Cadastrar Progresso</CustomButtonText>
-        </CustomButton>
-        <TextEdit onPress={handleGoHome}>Cancelar</TextEdit>
-      </InputArea>
+          <CustomButton onPress={handleSignClick}>
+            <CustomButtonText>Cadastrar Progresso</CustomButtonText>
+          </CustomButton>
+          <TextEdit onPress={handleGoHome}>Cancelar</TextEdit>
+        </InputArea>
+      </ScrollView>
     </Container>
   );
 };

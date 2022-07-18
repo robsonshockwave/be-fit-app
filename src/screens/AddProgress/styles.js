@@ -5,7 +5,6 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: -60px;
 `;
 
 export const InputArea = styled.View`
@@ -21,7 +20,7 @@ export const TextTitle = styled.Text`
   line-height: 39px;
   color: #4f5967;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 100px;
 `;
 
 export const CustomButton = styled.TouchableOpacity`

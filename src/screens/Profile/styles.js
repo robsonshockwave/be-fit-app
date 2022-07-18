@@ -3,9 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  justify-content: center;
   align-items: center;
-  margin-top: -40px;
 `;
 
 export const TextTitle = styled.Text`
@@ -15,6 +13,8 @@ export const TextTitle = styled.Text`
   font-size: 32px;
   line-height: 39px;
   color: #4f5967;
+  text-align: center;
+  margin-top: 100px;
 `;
 
 export const InputArea = styled.View`
