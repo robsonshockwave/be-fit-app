@@ -25,7 +25,7 @@ export const InputArea = styled.View`
 `;
 
 export const CustomButton = styled.TouchableOpacity`
-  margin-top: 23px;
+  margin-top: 5px;
   background: #30a960;
   border-radius: 10px;
   height: 48px;
@@ -46,14 +46,24 @@ export const CustomButtonText = styled.Text`
 export const WrapperOptions = styled.View`
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   margin-bottom: 10px;
 `;
 
 export const TextTypeUser = styled.Text`
   font-family: 'Montserrat';
   font-size: 14px;
-  text-align: center;
   color: #30a960;
-  padding: 20px 0 12px;
   font-weight: 700;
+  padding: 20px 0 7.5px;
+  text-align: center;
+`;
+
+export const TextLogin = styled.Text`
+  font-family: 'Montserrat';
+  font-size: 15px;
+  color: #30a960;
+  font-weight: 700;
+  padding: 20px 0 10px;
+  text-align: center;
 `;

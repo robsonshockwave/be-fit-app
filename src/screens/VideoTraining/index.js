@@ -1,5 +1,4 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
 import VideoPlayer from 'react-native-video-player';
 import {
   Container,
@@ -9,20 +8,22 @@ import {
   VideoContainer,
   WrapperTitle,
 } from './styles';
+import {useIsFocused} from '@react-navigation/native';
 
 export default ({route}) => {
   const [video, setVideo] = React.useState({});
+  const isFocused = useIsFocused();
 
   React.useEffect(() => {
     setVideo(route.params);
-  }, []);
+  }, [isFocused]);
 
   return (
     <Container>
       <VideoContainer>
         <VideoPlayer
           video={{
-            uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            uri: video?.url,
           }}
           videoWidth={1600}
           videoHeight={900}
@@ -30,7 +31,7 @@ export default ({route}) => {
           fullScreenOnLongPress
         />
         <WrapperTitle>
-          <TextNameTraining>Nome do treino</TextNameTraining>
+          <TextNameTraining>{video.name}</TextNameTraining>
           <TextTypeTraining>Tipo do treino: {video.category}</TextTypeTraining>
         </WrapperTitle>
         <TextAtent>
