@@ -19,7 +19,7 @@ import VideoPlayer from 'react-native-video-player';
 import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {UserContext} from '../../contexts/UserContext';
-import {Alert} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 import SelectInput from '../../components/SelectInput';
 
 export default () => {
@@ -99,56 +99,63 @@ export default () => {
 
   return (
     <Container>
-      <TextTitle>BE FIT</TextTitle>
-      <TitleForm>Cadastrar treino</TitleForm>
-      <InputArea>
-        <SigninInput
-          placeholder="Nome do treino"
-          value={nameField}
-          onChangeText={t => setNameField(t)}
-          marginOne
-          radiusTop
-        />
+      <ScrollView
+        style={{
+          flex: 1,
+          width: '100%',
+          marginBottom: 100,
+        }}>
+        <TextTitle>BE FIT</TextTitle>
+        <TitleForm>Cadastrar treino</TitleForm>
+        <InputArea>
+          <SigninInput
+            placeholder="Nome do treino"
+            value={nameField}
+            onChangeText={t => setNameField(t)}
+            marginOne
+            radiusTop
+          />
 
-        <SelectInput
-          placeholder={'Selecione a categoria'}
-          options={category}
-          setOption={onSetTypeField}
-          marginOne
-        />
+          <SelectInput
+            placeholder={'Selecione a categoria'}
+            options={category}
+            setOption={onSetTypeField}
+            marginOne
+          />
 
-        <UploadButton
-          onPress={() => {
-            launchImageLibrary(options, imagePickerCallback);
-          }}>
-          <TextUploadVideo>
-            + Upload do vídeo
-            <TextVideoExist style={{color: videoField ? '#ADFF2F' : 'red'}}>
-              {videoField ? '\nVÍDEO CARREGADO' : '\nSEM VÍDEO'}
-            </TextVideoExist>
-          </TextUploadVideo>
-        </UploadButton>
+          <UploadButton
+            onPress={() => {
+              launchImageLibrary(options, imagePickerCallback);
+            }}>
+            <TextUploadVideo>
+              + Upload do vídeo
+              <TextVideoExist style={{color: videoField ? '#ADFF2F' : 'red'}}>
+                {videoField ? '\nVÍDEO CARREGADO' : '\nSEM VÍDEO'}
+              </TextVideoExist>
+            </TextUploadVideo>
+          </UploadButton>
 
-        {preVideo && (
-          <>
-            <TextPreVideo>Pré visualização</TextPreVideo>
-            <VideoPlayer
-              video={{
-                uri: preVideo._parts[0][1].uri,
-                // uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-              }}
-              videoWidth={1600}
-              videoHeight={900}
-              disableFullscreen={false}
-            />
-          </>
-        )}
+          {preVideo && (
+            <>
+              <TextPreVideo>Pré visualização</TextPreVideo>
+              <VideoPlayer
+                video={{
+                  uri: preVideo._parts[0][1].uri,
+                  // uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                }}
+                videoWidth={1600}
+                videoHeight={900}
+                disableFullscreen={false}
+              />
+            </>
+          )}
 
-        <CustomButton disabled={!videoField} onPress={handleAddTraining}>
-          <CustomButtonText>Adicionar treino</CustomButtonText>
-        </CustomButton>
-        <TextEdit onPress={handleGoHome}>Cancelar</TextEdit>
-      </InputArea>
+          <CustomButton disabled={!videoField} onPress={handleAddTraining}>
+            <CustomButtonText>Adicionar treino</CustomButtonText>
+          </CustomButton>
+          <TextEdit onPress={handleGoHome}>Cancelar</TextEdit>
+        </InputArea>
+      </ScrollView>
     </Container>
   );
 };

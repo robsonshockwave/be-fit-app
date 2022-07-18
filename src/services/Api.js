@@ -246,11 +246,11 @@ export default {
           Authorization: `${token}`,
         },
         body: JSON.stringify({
-          weightField,
-          heightField,
-          armsField,
-          legsField,
-          waistField,
+          weightField: parseFloat(weightField),
+          heightField: parseFloat(heightField),
+          armsField: parseFloat(armsField),
+          legsField: parseFloat(legsField),
+          waistField: parseFloat(waistField),
           gymStudentId,
         }),
       });
