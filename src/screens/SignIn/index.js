@@ -35,9 +35,9 @@ export default () => {
     if (emailField != '' && passwordField != '' && typeUserField != '') {
       let res = await Api.signIn(emailField, passwordField, typeUserField);
 
-      const decoded = jwt_decode(res);
+      const decoded = jwt_decode(res.access_token);
       if (res) {
-        await AsyncStorage.setItem('token', res);
+        await AsyncStorage.setItem('token', res.access_token);
 
         userDispatch({
           type: 'setUseType',

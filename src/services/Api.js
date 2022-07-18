@@ -227,16 +227,16 @@ export default {
       return;
     }
   },
-  addProgressStudent: async (
-    weight,
-    height,
-    arms,
-    legs,
-    waist,
-    chest,
-    gymStudentId,
-    token,
-  ) => {
+  addProgressStudent: async (token, values) => {
+    const {
+      weightField,
+      heightField,
+      armsField,
+      legsField,
+      waistField,
+      gymStudentId,
+    } = values;
+    console.log(token, values, 'token');
     try {
       let res = await fetch(`${BASE_API}/api/datastudent/create`, {
         method: 'POST',
@@ -246,16 +246,15 @@ export default {
           Authorization: `${token}`,
         },
         body: JSON.stringify({
-          weight,
-          height,
-          arms,
-          legs,
-          waist,
-          chest,
-          gymStudentId: gymStudentId.toString(),
+          weightField,
+          heightField,
+          armsField,
+          legsField,
+          waistField,
+          gymStudentId,
         }),
       });
-      console.log(await res.json());
+
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -272,7 +271,6 @@ export default {
           Authorization: `${token}`,
         },
       });
-      console.log(await res.json());
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);

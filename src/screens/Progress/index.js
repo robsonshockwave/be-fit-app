@@ -67,15 +67,15 @@ export default () => {
           listProgress?.map((values, index) => {
             return (
               <WrapperStudentRecord key={index}>
-                <TextRecordTitle>Data: </TextRecordTitle>
+                <TextRecordTitle>Progresso {index + 1}</TextRecordTitle>
                 <TextType>Medidas Corporais</TextType>
-                <TextRecord>Peso: </TextRecord>
-                <TextRecord>Altura: </TextRecord>
+                <TextRecord>Peso: {values.weight}</TextRecord>
+                <TextRecord>Altura: {values.height}</TextRecord>
                 <TextType>Circunferências</TextType>
-                <TextRecord>Braço: </TextRecord>
-                <TextRecord>Perna: </TextRecord>
-                <TextRecord>Cintura: </TextRecord>
-                <TextRecord>Peito: </TextRecord>
+                <TextRecord>Braço: {values.weight}</TextRecord>
+                <TextRecord>Perna: {values.legs}</TextRecord>
+                <TextRecord>Cintura: {values.waist}</TextRecord>
+                <TextRecord>Peito: {values.chest}</TextRecord>
               </WrapperStudentRecord>
             );
           })}
