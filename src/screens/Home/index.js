@@ -30,6 +30,7 @@ import {
   WrapperTitleList,
   TextTraining,
   WrapTraining,
+  ContentTitleButton,
 } from './styles.';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
@@ -37,12 +38,15 @@ import DeleteIcon from '../../assets/delete-icon.svg';
 import {Alert, RefreshControl, Text} from 'react-native';
 import Api from '../../services/Api';
 import {UserContext} from '../../contexts/UserContext';
+import SelectInput from '../../components/SelectInput';
 
 export default () => {
   const navigation = useNavigation();
   const {state: resultUser} = React.useContext(UserContext);
   const [listStudents, setListStudents] = React.useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [listTraining, setListTraining] = React.useState([]);
+  const [filterListTraining, setFilterListTraining] = React.useState([]);
 
   const signOut = async () => {
     await AsyncStorage.removeItem('token');
@@ -76,8 +80,6 @@ export default () => {
     }
   };
 
-  const [listTraining, setListTraining] = React.useState([]);
-
   const handleGetListTrainings = async id => {
     const token = await AsyncStorage.getItem('token');
     const studentId = resultUser.id;
@@ -85,12 +87,32 @@ export default () => {
 
     if (res) {
       setListTraining(res);
+      setFilterListTraining(res);
     } else {
       Alert.alert(
         'Ops!',
         'Ops, ocorreu um erro ao carregar a lista de treino!',
       );
     }
+  };
+
+  const days = [
+    'Todos',
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-feira',
+    'Sexta-feira',
+    'Sábado',
+    'Domingo',
+  ];
+
+  const filterList = option => {
+    const result = listTraining.filter(values => {
+      if (option === days[0]) return values;
+      else if (option === values?.day.trim()) return values;
+    });
+    setFilterListTraining(result);
   };
 
   const onRefresh = () => {
@@ -173,15 +195,24 @@ export default () => {
       ) : (
         <>
           <TextGoTrain>Bora treinar</TextGoTrain>
-          <WrapperLastTraining>
-            <TextLastTraining>↓ Últimos treinos postados ↓</TextLastTraining>
-          </WrapperLastTraining>
+          <ContentTitleButton>
+            <WrapperLastTraining>
+              <TextLastTraining>{`⬇️  Últimos treinos`}</TextLastTraining>
+            </WrapperLastTraining>
+            <SelectInput
+              options={days}
+              setOption={filterList}
+              radiusTop
+              radiusBottom
+              placeholder={'🔎 Dia'}
+              width={120}
+            />
+          </ContentTitleButton>
           <AreaView
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
             }>
-            {console.log(listTraining)}
-            {listTraining?.map((values, index) => (
+            {filterListTraining?.map((values, index) => (
               <CardTraining
                 key={index}
                 onPress={() => {
@@ -196,7 +227,7 @@ export default () => {
                 <TextTypeTraining>🏋️‍♀️ Tipo: {values?.category}</TextTypeTraining>
                 <WrapTraining>
                   <TextTraining>
-                    {values?.name ? values.name : 'Sem nome'}
+                    Nome: {values?.name ? values.name : 'Sem nome'}
                   </TextTraining>
                   <Text style={{fontSize: 12}}>Ver ➡️</Text>
                 </WrapTraining>

@@ -68,7 +68,7 @@ export default () => {
             return (
               <WrapperStudentRecord key={index}>
                 <TextRecordTitle>
-                  Progresso {listProgress.length - index}
+                  {listProgress.length - index}º Progresso
                 </TextRecordTitle>
                 <TextType>Medidas Corporais</TextType>
                 <TextRecord>Peso: {values.weight}</TextRecord>

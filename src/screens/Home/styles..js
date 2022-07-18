@@ -132,17 +132,26 @@ export const ImageDayExercise = styled.Image`
 
 export const WrapperLastTraining = styled.View`
   background-color: #30a960;
-  height: 52px;
+  height: 48px;
   align-items: center;
   justify-content: center;
-  margin: 0 30px 10px;
   border-radius: 10px;
+  flex: 1;
+  margin-right: 10px;
+`;
+
+export const ContentTitleButton = styled.View`
+  flex-direction: row;
+  margin: 0 30px;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const TextLastTraining = styled.Text`
   font-size: 17px;
   color: #fff;
   font-weight: bold;
+  padding: 0 10px;
 `;
 
 export const CardTraining = styled.TouchableOpacity`
