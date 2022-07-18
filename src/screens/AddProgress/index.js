@@ -27,9 +27,6 @@ export default () => {
   const [chestField, setChestField] = React.useState('');
 
   const handleSignClick = async () => {
-    const token = await AsyncStorage.getItem('token');
-    const gymStudentId = user?.id;
-
     if (
       weightField != '' &&
       heightField != '' &&
@@ -37,15 +34,18 @@ export default () => {
       legsField != '' &&
       waistField != ''
     ) {
-      let res = await Api.addProgressStudent(
+      const token = await AsyncStorage.getItem('token');
+      const gymStudentId = user?.id;
+      const values = {
         weightField,
         heightField,
         armsField,
         legsField,
         waistField,
         gymStudentId,
-        token,
-      );
+      };
+
+      let res = await Api.addProgressStudent(token, values);
 
       if (res) {
         Alert.alert('Eba!', 'Progresso cadastrado!');
