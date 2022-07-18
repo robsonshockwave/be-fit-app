@@ -1,4 +1,5 @@
 import React from 'react';
+import {ScrollView} from 'react-native';
 import VideoPlayer from 'react-native-video-player';
 import {
   Container,
@@ -9,7 +10,13 @@ import {
   WrapperTitle,
 } from './styles';
 
-export default () => {
+export default ({route}) => {
+  const [video, setVideo] = React.useState({});
+
+  React.useEffect(() => {
+    setVideo(route.params);
+  }, []);
+
   return (
     <Container>
       <VideoContainer>
@@ -24,7 +31,7 @@ export default () => {
         />
         <WrapperTitle>
           <TextNameTraining>Nome do treino</TextNameTraining>
-          <TextTypeTraining>Tipo do treino</TextTypeTraining>
+          <TextTypeTraining>Tipo do treino: {video.category}</TextTypeTraining>
         </WrapperTitle>
         <TextAtent>
           Para melhor visualização do vídeo-aula rotacione a tela.

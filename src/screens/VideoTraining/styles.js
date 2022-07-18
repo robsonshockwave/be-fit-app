@@ -7,7 +7,8 @@ export const Container = styled.SafeAreaView`
 
 export const WrapperTitle = styled.View`
   align-items: center;
-  margin: 20px 30px 0;
+  justify-content: center;
+  margin: 20px 30px;
   background-color: #30a960;
   border-radius: 10px;
 `;
@@ -19,6 +20,7 @@ export const TextNameTraining = styled.Text`
   font-size: 20px;
   color: #fff;
   padding-top: 10px;
+  text-align: center;
 `;
 
 export const TextTypeTraining = styled.Text`
@@ -38,4 +40,5 @@ export const TextAtent = styled.Text`
   text-align: center;
   font-size: 13px;
   margin-top: 7px;
+  margin-bottom: 80px;
 `;

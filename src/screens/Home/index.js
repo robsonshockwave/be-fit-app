@@ -76,12 +76,30 @@ export default () => {
     }
   };
 
+  const [listTraining, setListTraining] = React.useState([]);
+
+  const handleGetListTrainings = async id => {
+    const token = await AsyncStorage.getItem('token');
+    const studentId = resultUser.id;
+    let res = await Api.getTrainingStudent(studentId, token);
+
+    if (res) {
+      setListTraining(res);
+    } else {
+      Alert.alert(
+        'Ops!',
+        'Ops, ocorreu um erro ao carregar a lista de treino!',
+      );
+    }
+  };
+
   const onRefresh = () => {
     setRefreshing(false);
     requestListStudents();
   };
 
   React.useEffect(() => {
+    handleGetListTrainings();
     requestListStudents();
   }, []);
 
@@ -95,6 +113,7 @@ export default () => {
       </WrapperHeader>
       <TextHello>
         Olá, <TextBold>{resultUser.name}</TextBold>! 💪
+        {console.log(listTraining)}
       </TextHello>
 
       {resultUser?.useType === 'P' ? (
@@ -162,14 +181,19 @@ export default () => {
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
             }>
-            <CardTraining
-              onPress={() => {
-                navigation.navigate('VideoTraining');
-              }}>
-              <TextTypeTraining>🏋️‍♀️ Tipo: </TextTypeTraining>
-              <TextNameTraining>Nome do treino</TextNameTraining>
-              <TextDateTraining>Dia: </TextDateTraining>
-            </CardTraining>
+            {listTraining?.map((values, index) => (
+              <CardTraining
+                key={index}
+                onPress={() => {
+                  navigation.navigate('VideoTraining', {
+                    category: values?.category.trim(),
+                  });
+                }}>
+                <TextTypeTraining>🏋️‍♀️ Tipo: {values?.category}</TextTypeTraining>
+                <TextNameTraining>Nome do treino</TextNameTraining>
+                <TextDateTraining>Dia: {values?.day}</TextDateTraining>
+              </CardTraining>
+            ))}
           </AreaView>
         </>
       )}

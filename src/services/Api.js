@@ -305,4 +305,20 @@ export default {
       return;
     }
   },
+  getTrainingStudent: async (id, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/workout/list/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      });
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
 };
