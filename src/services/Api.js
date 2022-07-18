@@ -24,7 +24,6 @@ export default {
         },
         body: JSON.stringify({email, password, useType}),
       });
-      console.log(res);
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -48,7 +47,6 @@ export default {
           PersonalId: personalId.toString(),
         }),
       });
-      console.log(res);
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -68,7 +66,6 @@ export default {
           id: id.toString(),
         }),
       });
-      console.log(res);
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -85,7 +82,6 @@ export default {
           Authorization: `${token}`,
         },
       });
-      console.log(res);
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -102,7 +98,6 @@ export default {
           Authorization: `${token}`,
         },
       });
-      console.log(res, 'LISTA DE ESTUDANTES');
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -120,7 +115,6 @@ export default {
         },
         body: JSON.stringify({id: id.toString()}),
       });
-      console.log(res);
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -138,7 +132,6 @@ export default {
         },
         body: JSON.stringify({name, password}),
       });
-      console.log(res);
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -227,16 +220,15 @@ export default {
       return;
     }
   },
-  addProgressStudent: async (
-    weight,
-    height,
-    arms,
-    legs,
-    waist,
-    chest,
-    gymStudentId,
-    token,
-  ) => {
+  addProgressStudent: async (token, values) => {
+    const {
+      weightField,
+      heightField,
+      armsField,
+      legsField,
+      waistField,
+      gymStudentId,
+    } = values;
     try {
       let res = await fetch(`${BASE_API}/api/datastudent/create`, {
         method: 'POST',
@@ -246,16 +238,15 @@ export default {
           Authorization: `${token}`,
         },
         body: JSON.stringify({
-          weight,
-          height,
-          arms,
-          legs,
-          waist,
-          chest,
-          gymStudentId: gymStudentId.toString(),
+          weightField: parseFloat(weightField),
+          heightField: parseFloat(heightField),
+          armsField: parseFloat(armsField),
+          legsField: parseFloat(legsField),
+          waistField: parseFloat(waistField),
+          gymStudentId,
         }),
       });
-      console.log(await res.json());
+
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -272,7 +263,6 @@ export default {
           Authorization: `${token}`,
         },
       });
-      console.log(await res.json());
       return await res.json();
     } catch (err) {
       console.log('deu erro', err);
@@ -300,6 +290,22 @@ export default {
           PersonalId: PersonalId.toString(),
           gymStudentId: gymStudentId.toString(),
         }),
+      });
+      return await res.json();
+    } catch (err) {
+      console.log('deu erro', err);
+      return;
+    }
+  },
+  getTrainingStudent: async (id, token) => {
+    try {
+      let res = await fetch(`${BASE_API}/api/workout/list/${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
       });
       return await res.json();
     } catch (err) {

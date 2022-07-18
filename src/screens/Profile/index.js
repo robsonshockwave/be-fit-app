@@ -13,7 +13,7 @@ import {UserContext} from '../../contexts/UserContext';
 import Api from '../../services/Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import {Alert} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 
 export default () => {
   const navigation = useNavigation();
@@ -106,68 +106,75 @@ export default () => {
 
   return (
     <Container>
-      <TextTitle>BE FIT</TextTitle>
+      <ScrollView
+        style={{
+          flex: 1,
+          width: '100%',
+          marginBottom: 100,
+        }}>
+        <TextTitle>BE FIT</TextTitle>
 
-      <InputArea>
-        {!editProfile ? (
-          <>
-            <TitleForm>Dados da conta</TitleForm>
-            <SigninInput
-              placeholder={name}
-              editable={false}
-              marginOne
-              radiusTop
-            />
-            <SigninInput
-              placeholder={email}
-              editable={false}
-              marginOne
-              radiusBottom
-            />
-            <TextEdit onPress={handleEditProfile}>
-              Deseja alterar o nome e senha?
-            </TextEdit>
-          </>
-        ) : (
-          <>
-            <TitleForm>Alteração de dados</TitleForm>
-            <SigninInput
-              placeholder="Nome do usuário"
-              value={nameField}
-              onChangeText={t => {
-                setNameField(t);
-              }}
-              marginOne
-              radiusTop
-              ma
-            />
-            {useType === 'P' && (
+        <InputArea>
+          {!editProfile ? (
+            <>
+              <TitleForm>Dados da conta</TitleForm>
               <SigninInput
-                placeholder="E-mail"
-                value={emailField}
+                placeholder={name}
+                editable={false}
+                marginOne
+                radiusTop
+              />
+              <SigninInput
+                placeholder={email}
+                editable={false}
+                marginOne
+                radiusBottom
+              />
+              <TextEdit onPress={handleEditProfile}>
+                Deseja alterar o nome e senha?
+              </TextEdit>
+            </>
+          ) : (
+            <>
+              <TitleForm>Alteração de dados</TitleForm>
+              <SigninInput
+                placeholder="Nome do usuário"
+                value={nameField}
                 onChangeText={t => {
-                  setEmailField(t);
+                  setNameField(t);
                 }}
                 marginOne
+                radiusTop
+                ma
               />
-            )}
-            <SigninInput
-              placeholder="Digite sua senha"
-              value={passwordField}
-              onChangeText={t => {
-                setPasswordField(t);
-              }}
-              password={true}
-              marginOne
-              radiusBottom
-            />
-            <CustomButton onPress={handleAttClick}>
-              <CustomButtonText>Atualizar</CustomButtonText>
-            </CustomButton>
-            <TextEdit onPress={handleEditProfile}>Cancelar</TextEdit>
-          </>
-        )}
-      </InputArea>
+              {useType === 'P' && (
+                <SigninInput
+                  placeholder="E-mail"
+                  value={emailField}
+                  onChangeText={t => {
+                    setEmailField(t);
+                  }}
+                  marginOne
+                />
+              )}
+              <SigninInput
+                placeholder="Digite sua senha"
+                value={passwordField}
+                onChangeText={t => {
+                  setPasswordField(t);
+                }}
+                password={true}
+                marginOne
+                radiusBottom
+              />
+              <CustomButton onPress={handleAttClick}>
+                <CustomButtonText>Atualizar</CustomButtonText>
+              </CustomButton>
+              <TextEdit onPress={handleEditProfile}>Cancelar</TextEdit>
+            </>
+          )}
+        </InputArea>
+      </ScrollView>
     </Container>
   );
 };

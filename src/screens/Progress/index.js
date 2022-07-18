@@ -29,7 +29,7 @@ export default () => {
     let res = await Api.getListProgress(studentId, token);
 
     if (res) {
-      setListProgress(res);
+      setListProgress(res.reverse());
     } else {
       Alert.alert(
         'Ops!',
@@ -67,15 +67,17 @@ export default () => {
           listProgress?.map((values, index) => {
             return (
               <WrapperStudentRecord key={index}>
-                <TextRecordTitle>Data: </TextRecordTitle>
+                <TextRecordTitle>
+                  Progresso {listProgress.length - index}
+                </TextRecordTitle>
                 <TextType>Medidas Corporais</TextType>
-                <TextRecord>Peso: </TextRecord>
-                <TextRecord>Altura: </TextRecord>
+                <TextRecord>Peso: {values.weight}</TextRecord>
+                <TextRecord>Altura: {values.height}</TextRecord>
                 <TextType>Circunferências</TextType>
-                <TextRecord>Braço: </TextRecord>
-                <TextRecord>Perna: </TextRecord>
-                <TextRecord>Cintura: </TextRecord>
-                <TextRecord>Peito: </TextRecord>
+                <TextRecord>Braço: {values.weight}</TextRecord>
+                <TextRecord>Perna: {values.legs}</TextRecord>
+                <TextRecord>Cintura: {values.waist}</TextRecord>
+                <TextRecord>Peito: {values.chest}</TextRecord>
               </WrapperStudentRecord>
             );
           })}

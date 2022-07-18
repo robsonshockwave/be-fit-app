@@ -8,6 +8,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const TextTitle = styled.Text`
+  margin-top: 100px;
   margin-bottom: 0px;
   font-family: 'Montserrat';
   font-style: normal;
@@ -15,6 +16,7 @@ export const TextTitle = styled.Text`
   font-size: 32px;
   line-height: 39px;
   color: #4f5967;
+  text-align: center;
 `;
 
 export const InputArea = styled.View`

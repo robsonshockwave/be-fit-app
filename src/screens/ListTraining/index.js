@@ -25,7 +25,6 @@ export default () => {
     const personalId = resultUser?.id;
     const token = await AsyncStorage.getItem('token');
     let res = await Api.getAllVideos(personalId, token);
-    console.log(res, 'lista de treinos');
     setListTrainings(res);
   };
 

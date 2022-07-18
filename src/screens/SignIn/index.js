@@ -8,6 +8,7 @@ import {
   CustomButtonText,
   TextTypeUser,
   WrapperOptions,
+  TextLogin,
 } from './styles';
 import {UserContext} from '../../contexts/UserContext';
 
@@ -20,7 +21,7 @@ import RadioForm, {
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import jwt_decode from 'jwt-decode';
-import {Alert} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 
 export default () => {
   const {dispatch: userDispatch, state: user} = React.useContext(UserContext);
@@ -35,9 +36,9 @@ export default () => {
     if (emailField != '' && passwordField != '' && typeUserField != '') {
       let res = await Api.signIn(emailField, passwordField, typeUserField);
 
-      const decoded = jwt_decode(res);
+      const decoded = jwt_decode(res.access_token);
       if (res) {
-        await AsyncStorage.setItem('token', res);
+        await AsyncStorage.setItem('token', res.access_token);
 
         userDispatch({
           type: 'setUseType',
@@ -76,81 +77,85 @@ export default () => {
   };
 
   var radioProps = [
-    {label: 'Aluno', value: 'G'},
-    {label: 'Personal', value: 'P'},
+    {label: '🤓 Aluno', value: 'G'},
+    {label: 'Personal 👨‍🏫', value: 'P'},
   ];
 
   return (
     <Container>
       <TextTitle>BE FIT</TextTitle>
 
-      <InputArea>
-        <SigninInput
-          placeholder="E-mail"
-          value={emailField}
-          onChangeText={t => setEmailField(t)}
-          marginOne
-          radiusTop
-        />
-        <SigninInput
-          placeholder="Senha"
-          value={passwordField}
-          onChangeText={t => {
-            setPasswordField(t);
-          }}
-          password={true}
-          marginOne
-          radiusBottom
-        />
+      <ScrollView
+        style={{flex: 1, width: '100%', paddingTop: 130, paddingBottom: 80}}>
+        <InputArea>
+          <TextLogin>Realizar login:</TextLogin>
+          <SigninInput
+            placeholder="E-mail"
+            value={emailField}
+            onChangeText={t => setEmailField(t)}
+            marginOne
+            radiusTop
+          />
+          <SigninInput
+            placeholder="Senha"
+            value={passwordField}
+            onChangeText={t => {
+              setPasswordField(t);
+            }}
+            password={true}
+            marginOne
+            radiusBottom
+          />
 
-        <TextTypeUser>Você é:</TextTypeUser>
-        <WrapperOptions>
-          {radioProps.map((obj, i) => (
-            <RadioButton
-              formHorizontal={true}
-              labelHorizontal={true}
-              key={i}
-              style={{
-                marginLeft: i === 0 ? 0 : 15,
-                marginRight: i === 1 ? 15 : 0,
-              }}>
-              <RadioButtonInput
-                obj={obj}
-                index={i}
-                isSelected={typeUserIndexField === i}
-                onPress={value => {
-                  setTypeUserField(value);
-                  setTypeUserIndexField(i);
-                }}
-                borderWidth={2}
-                buttonInnerColor={'#30A960'}
-                buttonOuterColor={
-                  typeUserIndexField === i ? '#30A960' : '#4F5967'
-                }
-                buttonSize={16}
-                buttonOuterSize={26}
-                buttonStyle={{flexDirection: 'row'}}
-                buttonWrapStyle={{marginLeft: 10}}
-              />
-              <RadioButtonLabel
-                obj={obj}
-                index={i}
-                labelHorizontal={true}
-                onPress={() => {}}
-                labelStyle={{
-                  fontSize: 12,
-                  color: typeUserIndexField === i ? '#30A960' : '#4F5967',
-                  flexDirection: 'row',
-                }}
-                labelWrapStyle={{flexDirection: 'row'}}
-              />
-            </RadioButton>
-          ))}
-        </WrapperOptions>
-        <CustomButton onPress={handleSignClick}>
-          <CustomButtonText>Fazer login</CustomButtonText>
-        </CustomButton>
-      </InputArea>
+          <TextTypeUser>Você é:</TextTypeUser>
+          <WrapperOptions>
+            {radioProps.map((obj, i) => (
+              <RadioButton
+                formHorizontal={true}
+                labelHorizontal={false}
+                key={i}
+                style={{
+                  marginLeft: i === 0 ? 0 : 15,
+                  marginRight: i === 1 ? 15 : 0,
+                }}>
+                <RadioButtonInput
+                  obj={obj}
+                  index={i}
+                  isSelected={typeUserIndexField === i}
+                  onPress={value => {
+                    setTypeUserField(value);
+                    setTypeUserIndexField(i);
+                  }}
+                  borderWidth={2}
+                  buttonInnerColor={'#30A960'}
+                  buttonOuterColor={
+                    typeUserIndexField === i ? '#30A960' : '#4F5967'
+                  }
+                  buttonSize={16}
+                  buttonOuterSize={26}
+                  buttonStyle={{flexDirection: 'row'}}
+                  buttonWrapStyle={{marginLeft: 10}}
+                />
+                <RadioButtonLabel
+                  obj={obj}
+                  index={i}
+                  labelHorizontal={true}
+                  onPress={() => {}}
+                  labelStyle={{
+                    fontSize: 13,
+                    color: typeUserIndexField === i ? '#30A960' : '#4F5967',
+                    flexDirection: 'row',
+                  }}
+                  labelWrapStyle={{flexDirection: 'row'}}
+                />
+              </RadioButton>
+            ))}
+          </WrapperOptions>
+          <CustomButton onPress={handleSignClick}>
+            <CustomButtonText>Entrar</CustomButtonText>
+          </CustomButton>
+        </InputArea>
+      </ScrollView>
     </Container>
   );
 };

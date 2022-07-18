@@ -11,7 +11,6 @@ import {
   CustomButtonTwo,
   DeleteStudentButton,
   HeaderTitle,
-  ImageDayExercise,
   StudentCard,
   StudentGoal,
   StudentName,
@@ -25,16 +24,17 @@ import {
   TextLastTraining,
   TextList,
   TextLogout,
-  TextNameTraining,
   TextTypeTraining,
   WrapperHeader,
   WrapperLastTraining,
   WrapperTitleList,
+  TextTraining,
+  WrapTraining,
 } from './styles.';
 import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import DeleteIcon from '../../assets/delete-icon.svg';
-import {Alert, RefreshControl, Text, View} from 'react-native';
+import {Alert, RefreshControl, Text} from 'react-native';
 import Api from '../../services/Api';
 import {UserContext} from '../../contexts/UserContext';
 
@@ -76,12 +76,30 @@ export default () => {
     }
   };
 
+  const [listTraining, setListTraining] = React.useState([]);
+
+  const handleGetListTrainings = async id => {
+    const token = await AsyncStorage.getItem('token');
+    const studentId = resultUser.id;
+    let res = await Api.getTrainingStudent(studentId, token);
+
+    if (res) {
+      setListTraining(res);
+    } else {
+      Alert.alert(
+        'Ops!',
+        'Ops, ocorreu um erro ao carregar a lista de treino!',
+      );
+    }
+  };
+
   const onRefresh = () => {
     setRefreshing(false);
     requestListStudents();
   };
 
   React.useEffect(() => {
+    handleGetListTrainings();
     requestListStudents();
   }, []);
 
@@ -162,14 +180,29 @@ export default () => {
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={() => {}} />
             }>
-            <CardTraining
-              onPress={() => {
-                navigation.navigate('VideoTraining');
-              }}>
-              <TextTypeTraining>🏋️‍♀️ Tipo: </TextTypeTraining>
-              <TextNameTraining>Nome do treino</TextNameTraining>
-              <TextDateTraining>Dia: </TextDateTraining>
-            </CardTraining>
+            {console.log(listTraining)}
+            {listTraining?.map((values, index) => (
+              <CardTraining
+                key={index}
+                onPress={() => {
+                  navigation.navigate('VideoTraining', {
+                    category: values?.category && values?.category.trim(),
+                    name: values?.name ? values?.name.trim() : 'Sem treino',
+                    url: values?.url
+                      ? values?.url
+                      : 'https://www.youtube.com/watch?v=Hm5d0DcjFCo',
+                  });
+                }}>
+                <TextTypeTraining>🏋️‍♀️ Tipo: {values?.category}</TextTypeTraining>
+                <WrapTraining>
+                  <TextTraining>
+                    {values?.name ? values.name : 'Sem nome'}
+                  </TextTraining>
+                  <Text style={{fontSize: 12}}>Ver ➡️</Text>
+                </WrapTraining>
+                <TextDateTraining>Dia: {values?.day}</TextDateTraining>
+              </CardTraining>
+            ))}
           </AreaView>
         </>
       )}

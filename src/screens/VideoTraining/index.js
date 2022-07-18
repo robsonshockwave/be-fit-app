@@ -8,14 +8,22 @@ import {
   VideoContainer,
   WrapperTitle,
 } from './styles';
+import {useIsFocused} from '@react-navigation/native';
 
-export default () => {
+export default ({route}) => {
+  const [video, setVideo] = React.useState({});
+  const isFocused = useIsFocused();
+
+  React.useEffect(() => {
+    setVideo(route.params);
+  }, [isFocused]);
+
   return (
     <Container>
       <VideoContainer>
         <VideoPlayer
           video={{
-            uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            uri: video?.url,
           }}
           videoWidth={1600}
           videoHeight={900}
@@ -23,8 +31,8 @@ export default () => {
           fullScreenOnLongPress
         />
         <WrapperTitle>
-          <TextNameTraining>Nome do treino</TextNameTraining>
-          <TextTypeTraining>Tipo do treino</TextTypeTraining>
+          <TextNameTraining>{video.name}</TextNameTraining>
+          <TextTypeTraining>Tipo do treino: {video.category}</TextTypeTraining>
         </WrapperTitle>
         <TextAtent>
           Para melhor visualização do vídeo-aula rotacione a tela.
