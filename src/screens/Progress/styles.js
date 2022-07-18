@@ -43,8 +43,8 @@ export const WrapperStudentRecord = styled.View`
 `;
 
 export const TextRecordTitle = styled.Text`
-  font-size: 17px;
-  color: #4f5967;
+  font-size: 16px;
+  color: #30a960;
   margin-top: -5px;
   padding-bottom: 7px;
   font-weight: bold;

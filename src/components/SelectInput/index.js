@@ -8,6 +8,7 @@ export default ({
   marginOne,
   radiusTop,
   radiusBottom,
+  width,
 }) => {
   return (
     <SelectDropdown
@@ -17,7 +18,7 @@ export default ({
       }}
       buttonStyle={{
         backgroundColor: '#d7d7d7',
-        width: '100%',
+        width: width ? width : '100%',
         height: 48,
         borderTopLeftRadius: radiusTop ? 12 : 0,
         borderTopRightRadius: radiusTop ? 12 : 0,
@@ -36,7 +37,7 @@ export default ({
         marginRight: 12,
       }}
       search
-      searchPlaceHolder={'Pesquise a opção'}
+      searchPlaceHolder={'Acha a opção'}
       searchInputStyle={{borderRadius: 10}}
       dropdownStyle={{borderRadius: 10}}
       rowTextStyle={{color: '#4f5967', fontSize: 15}}
